@@ -1,1399 +1,2509 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zaytoonic Coders — جامعة الزيتونة الأردنية</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Geist+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
 
-/* ════════════════════════════════════════════════════
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zaytoonic Coders — جامعة الزيتونة الأردنية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Geist+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ════════════════════════════════════════════════════
    TOKENS
 ════════════════════════════════════════════════════ */
-:root {
-  /* Core palette */
-  --black:    #080c08;
-  --deep:     #0c130c;
-  --forest:   #111e11;
-  --canopy:   #172417;
-  --bark:     #1f321f;
+    :root {
+      /* Core palette */
+      --black: #080c08;
+      --deep: #0c130c;
+      --forest: #111e11;
+      --canopy: #172417;
+      --bark: #1f321f;
 
-  --surface:  #f5f8f0;
-  --s2:       #edf2e4;
-  --s3:       #e2ead6;
-  --s4:       #d4e0c4;
+      --surface: #f5f8f0;
+      --s2: #edf2e4;
+      --s3: #e2ead6;
+      --s4: #d4e0c4;
 
-  --txt1:     #0e1a0e;
-  --txt2:     #2a4028;
-  --txt3:     #4d6e48;
-  --txt4:     #7a9672;
-  --txt5:     #a8bea0;
+      --txt1: #0e1a0e;
+      --txt2: #2a4028;
+      --txt3: #4d6e48;
+      --txt4: #7a9672;
+      --txt5: #a8bea0;
 
-  /* Single accent */
-  --acid:     #b8f000;
-  --acid-dim: rgba(184,240,0,0.14);
-  --acid-mid: rgba(184,240,0,0.35);
-  --acid-str: rgba(184,240,0,0.70);
+      /* Single accent */
+      --acid: #b8f000;
+      --acid-dim: rgba(184, 240, 0, 0.14);
+      --acid-mid: rgba(184, 240, 0, 0.35);
+      --acid-str: rgba(184, 240, 0, 0.70);
 
-  /* Secondary accents — used sparingly */
-  --mint:     #00e8a0;
-  --sky:      #00d4f0;
-  --amber:    #f0b000;
-  --rose:     #f04060;
-  --violet:   #9060f0;
+      /* Secondary accents — used sparingly */
+      --mint: #00e8a0;
+      --sky: #00d4f0;
+      --amber: #f0b000;
+      --rose: #f04060;
+      --violet: #9060f0;
 
-  /* Borders */
-  --b-lt:  rgba(255,255,255,0.08);
-  --b-mid: rgba(255,255,255,0.14);
-  --b-str: rgba(255,255,255,0.22);
-  --b-gr:  rgba(100,160,80,0.22);
-  --b-gr2: rgba(100,160,80,0.40);
+      /* Borders */
+      --b-lt: rgba(255, 255, 255, 0.08);
+      --b-mid: rgba(255, 255, 255, 0.14);
+      --b-str: rgba(255, 255, 255, 0.22);
+      --b-gr: rgba(100, 160, 80, 0.22);
+      --b-gr2: rgba(100, 160, 80, 0.40);
 
-  /* Shadows */
-  --sh-sm:  0 2px 8px rgba(5,15,5,0.12);
-  --sh-md:  0 6px 24px rgba(5,15,5,0.15), 0 2px 6px rgba(5,15,5,0.08);
-  --sh-lg:  0 16px 48px rgba(5,15,5,0.20), 0 4px 12px rgba(5,15,5,0.10);
-  --sh-xl:  0 28px 72px rgba(5,15,5,0.28), 0 8px 24px rgba(5,15,5,0.12);
-  --sh-dk:  0 24px 64px rgba(0,0,0,0.60), 0 6px 20px rgba(0,0,0,0.35);
+      /* Shadows */
+      --sh-sm: 0 2px 8px rgba(5, 15, 5, 0.12);
+      --sh-md: 0 6px 24px rgba(5, 15, 5, 0.15), 0 2px 6px rgba(5, 15, 5, 0.08);
+      --sh-lg: 0 16px 48px rgba(5, 15, 5, 0.20), 0 4px 12px rgba(5, 15, 5, 0.10);
+      --sh-xl: 0 28px 72px rgba(5, 15, 5, 0.28), 0 8px 24px rgba(5, 15, 5, 0.12);
+      --sh-dk: 0 24px 64px rgba(0, 0, 0, 0.60), 0 6px 20px rgba(0, 0, 0, 0.35);
 
-  /* Glow */
-  --glow-acid:  0 0 40px rgba(184,240,0,0.32), 0 0 80px rgba(184,240,0,0.10);
-  --glow-dk:    0 0 48px rgba(50,120,40,0.45), 0 0 100px rgba(50,120,40,0.18);
+      /* Glow */
+      --glow-acid: 0 0 40px rgba(184, 240, 0, 0.32), 0 0 80px rgba(184, 240, 0, 0.10);
+      --glow-dk: 0 0 48px rgba(50, 120, 40, 0.45), 0 0 100px rgba(50, 120, 40, 0.18);
 
-  /* Type */
-  --f-display: 'Syne', sans-serif;
-  --f-body:    'Instrument Sans', sans-serif;
-  --f-mono:    'Geist Mono', monospace;
+      /* Type */
+      --f-display: 'Syne', sans-serif;
+      --f-body: 'Instrument Sans', sans-serif;
+      --f-mono: 'Geist Mono', monospace;
 
-  /* Radius */
-  --r1:  6px;
-  --r2:  12px;
-  --r3:  20px;
-  --r4:  28px;
-  --rF:  9999px;
+      /* Radius */
+      --r1: 6px;
+      --r2: 12px;
+      --r3: 20px;
+      --r4: 28px;
+      --rF: 9999px;
 
-  /* Easing */
-  --ez-out:    cubic-bezier(0.16, 1, 0.3, 1);
-  --ez-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ez-smooth: cubic-bezier(0.25, 1, 0.4, 1);
-}
+      /* Easing */
+      --ez-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ez-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ez-smooth: cubic-bezier(0.25, 1, 0.4, 1);
+    }
 
-/* ════════════════════════════════════════════════════
+    /* ════════════════════════════════════════════════════
    RESET
 ════════════════════════════════════════════════════ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; }
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: var(--f-body);
-  background: var(--surface);
-  color: var(--txt1);
-  overflow-x: hidden;
-  line-height: 1.7;
-}
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-/* Grain */
-body::before {
-  content:'';
-  position:fixed; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events:none; z-index:9999; mix-blend-mode:overlay; opacity:0.5;
-}
+    body {
+      font-family: var(--f-body);
+      background: var(--surface);
+      color: var(--txt1);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
 
-::selection { background: rgba(184,240,0,0.25); color: var(--txt1); }
-::-webkit-scrollbar { width:5px; }
-::-webkit-scrollbar-track { background: var(--s2); }
-::-webkit-scrollbar-thumb { background: var(--txt4); border-radius:99px; }
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: overlay;
+      opacity: 0.5;
+    }
 
-/* ════════════════════════════════════════════════════
+    ::selection {
+      background: rgba(184, 240, 0, 0.25);
+      color: var(--txt1);
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--s2);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--txt4);
+      border-radius: 99px;
+    }
+
+    /* ════════════════════════════════════════════════════
    NAV
 ════════════════════════════════════════════════════ */
-.nav {
-  position:fixed; top:0; left:0; right:0; z-index:100;
-  padding:0 3rem;
-  height:68px;
-  display:flex; align-items:center; justify-content:space-between;
-  backdrop-filter:blur(28px) saturate(1.9);
-  -webkit-backdrop-filter:blur(28px) saturate(1.9);
-  background: rgba(245,248,240,0.84);
-  border-bottom: 1px solid var(--b-gr);
-  transition: all 0.4s var(--ez-smooth);
-}
-.nav.scrolled {
-  background:rgba(237,242,228,0.97);
-  box-shadow: 0 2px 24px rgba(15,40,10,0.10);
-  height:60px;
-}
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 0 3rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(28px) saturate(1.9);
+      -webkit-backdrop-filter: blur(28px) saturate(1.9);
+      background: rgba(245, 248, 240, 0.84);
+      border-bottom: 1px solid var(--b-gr);
+      transition: all 0.4s var(--ez-smooth);
+    }
 
-.nav-logo { display:flex; align-items:center; gap:0.7rem; text-decoration:none; }
-.nav-logo-mark {
-  width:38px; height:38px; border-radius:var(--r2);
-  background: linear-gradient(135deg, #1f3a14, #3a6420, #5a9030);
-  display:flex; align-items:center; justify-content:center;
-  font-size:1.1rem;
-  box-shadow: 0 3px 14px rgba(30,80,15,0.40);
-  transition: transform 0.35s var(--ez-spring);
-}
-.nav-logo:hover .nav-logo-mark { transform:rotate(-8deg) scale(1.1); }
-.nav-logo-text {
-  font-family: var(--f-display);
-  font-size:1.05rem; font-weight:800;
-  color: #1f3a14;
-  letter-spacing:-0.03em;
-}
-.nav-logo-sub {
-  display:block; font-family:var(--f-mono); font-size:0.60rem;
-  color:var(--txt4); letter-spacing:0.04em; margin-top:1px;
-}
+    .nav.scrolled {
+      background: rgba(237, 242, 228, 0.97);
+      box-shadow: 0 2px 24px rgba(15, 40, 10, 0.10);
+      height: 60px;
+    }
 
-.nav-links { display:flex; gap:2rem; list-style:none; }
-.nav-links a {
-  font-family:var(--f-display); font-size:0.84rem; font-weight:600;
-  color:var(--txt2); text-decoration:none;
-  position:relative; transition:color 0.2s;
-  padding-bottom:2px;
-}
-.nav-links a::after {
-  content:''; position:absolute; bottom:-2px; right:0;
-  width:0; height:2px; border-radius:2px;
-  background: var(--acid); box-shadow:0 0 8px var(--acid);
-  transition:width 0.3s var(--ez-smooth);
-}
-.nav-links a:hover { color:var(--txt1); }
-.nav-links a:hover::after { width:100%; }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      text-decoration: none;
+    }
 
-.nav-right { display:flex; align-items:center; gap:0.9rem; }
-.nav-status {
-  font-family:var(--f-mono); font-size:0.66rem; font-weight:500;
-  color:var(--acid); background: var(--acid-dim);
-  border:1px solid var(--acid-mid); border-radius:var(--r1);
-  padding:0.24rem 0.7rem; letter-spacing:0.05em;
-  display:flex; align-items:center; gap:0.4rem;
-}
-.nav-status .dot {
-  width:5px; height:5px; border-radius:50%;
-  background:var(--acid); box-shadow:0 0 7px var(--acid);
-  animation:blink 1.6s ease-in-out infinite;
-}
-.nav-btn {
-  font-family:var(--f-display); font-size:0.84rem; font-weight:700;
-  color:#fff; background: linear-gradient(135deg,#1f3a14,#3d6e22,#5a9030);
-  border:none; border-radius:var(--rF); padding:0.56rem 1.4rem;
-  cursor:pointer; letter-spacing:0.02em;
-  box-shadow:0 3px 16px rgba(25,70,12,0.40), var(--glow-dk);
-  transition:all 0.3s var(--ez-spring);
-}
-.nav-btn:hover { transform:translateY(-2px) scale(1.03); box-shadow:0 8px 24px rgba(25,70,12,0.55),var(--glow-dk); }
-.nav-btn:active { transform:scale(0.97); }
+    .nav-logo-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--r2);
+      background: linear-gradient(135deg, #1f3a14, #3a6420, #5a9030);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 3px 14px rgba(30, 80, 15, 0.40);
+      transition: transform 0.35s var(--ez-spring);
+    }
 
-@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+    .nav-logo:hover .nav-logo-mark {
+      transform: rotate(-8deg) scale(1.1);
+    }
 
-/* ════════════════════════════════════════════════════
+    .nav-logo-text {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #1f3a14;
+      letter-spacing: -0.03em;
+    }
+
+    .nav-logo-sub {
+      display: block;
+      font-family: var(--f-mono);
+      font-size: 0.60rem;
+      color: var(--txt4);
+      letter-spacing: 0.04em;
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--f-display);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--txt2);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      right: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--acid);
+      box-shadow: 0 0 8px var(--acid);
+      transition: width 0.3s var(--ez-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--txt1);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .nav-status {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      color: var(--acid);
+      background: var(--acid-dim);
+      border: 1px solid var(--acid-mid);
+      border-radius: var(--r1);
+      padding: 0.24rem 0.7rem;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-status .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 7px var(--acid);
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    .nav-btn {
+      font-family: var(--f-display);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, #1f3a14, #3d6e22, #5a9030);
+      border: none;
+      border-radius: var(--rF);
+      padding: 0.56rem 1.4rem;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      box-shadow: 0 3px 16px rgba(25, 70, 12, 0.40), var(--glow-dk);
+      transition: all 0.3s var(--ez-spring);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(25, 70, 12, 0.55), var(--glow-dk);
+    }
+
+    .nav-btn:active {
+      transform: scale(0.97);
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    /* ════════════════════════════════════════════════════
    HERO
 ════════════════════════════════════════════════════ */
-.hero {
-  min-height:100vh;
-  position:relative; overflow:hidden;
-  display:flex; align-items:center;
-  background: linear-gradient(152deg,
-    #050a05 0%, #080f08 10%,
-    #0d200e 22%, #134020 36%,
-    #186228 50%, #1c8030 62%,
-    #1ea038 74%, #22c040 86%,
-    #b8f000 100%);
-  isolation:isolate;
-}
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(152deg,
+          #050a05 0%, #080f08 10%,
+          #0d200e 22%, #134020 36%,
+          #186228 50%, #1c8030 62%,
+          #1ea038 74%, #22c040 86%,
+          #b8f000 100%);
+      isolation: isolate;
+    }
 
-/* Grid */
-.hero-grid {
-  position:absolute; inset:0; pointer-events:none;
-  background-image:
-    linear-gradient(rgba(184,240,0,0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(184,240,0,0.055) 1px, transparent 1px);
-  background-size:64px 64px;
-  mask-image: radial-gradient(ellipse 70% 70% at 40% 50%, #000 20%, transparent 80%);
-}
+    /* Grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(184, 240, 0, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184, 240, 0, 0.055) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 70% 70% at 40% 50%, #000 20%, transparent 80%);
+    }
 
-/* Diagonal lines */
-.hero-diag {
-  position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0;
-}
-.hero-diag::before {
-  content:''; position:absolute; inset:-50%;
-  background: repeating-linear-gradient(
-    -48deg, transparent, transparent 88px,
-    rgba(184,240,0,0.016) 88px, rgba(184,240,0,0.016) 89px
-  );
-}
+    /* Diagonal lines */
+    .hero-diag {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
 
-/* Orbs */
-.orb { position:absolute; border-radius:50%; filter:blur(72px); pointer-events:none; will-change:transform; }
-.orb-a {
-  width:700px; height:700px; top:-260px; right:-200px;
-  background:radial-gradient(circle at 30% 30%, rgba(0,230,110,0.55) 0%, rgba(100,230,0,0.30) 45%, transparent 70%);
-  animation:floatA 14s ease-in-out infinite alternate;
-}
-.orb-b {
-  width:480px; height:480px; bottom:-150px; left:60px;
-  background:radial-gradient(circle, rgba(184,240,0,0.42) 0%, rgba(0,210,190,0.20) 55%, transparent 70%);
-  animation:floatA 18s 2s ease-in-out infinite alternate;
-}
-.orb-c {
-  width:300px; height:300px; top:35%; left:32%;
-  background:radial-gradient(circle, rgba(240,176,0,0.45) 0%, transparent 70%);
-  animation:floatA 11s 1s ease-in-out infinite alternate;
-}
-.orb-d {
-  width:220px; height:220px; top:10%; left:18%;
-  background:radial-gradient(circle, rgba(144,96,240,0.35) 0%, transparent 70%);
-  animation:floatA 9s 0.5s ease-in-out infinite alternate;
-}
+    .hero-diag::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: repeating-linear-gradient(-48deg, transparent, transparent 88px,
+          rgba(184, 240, 0, 0.016) 88px, rgba(184, 240, 0, 0.016) 89px);
+    }
 
-@keyframes floatA {
-  from { transform:translateY(0) scale(1); }
-  to   { transform:translateY(-36px) scale(1.07); }
-}
+    /* Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      pointer-events: none;
+      will-change: transform;
+    }
 
-/* Atmosphere */
-.hero::after {
-  content:''; position:absolute; inset:0; pointer-events:none; z-index:1;
-  background:
-    radial-gradient(ellipse 60% 55% at 82% 8%, rgba(0,212,240,0.16) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 8% 88%, rgba(184,240,0,0.15) 0%, transparent 55%),
-    radial-gradient(ellipse 35% 45% at 65% 70%, rgba(144,96,240,0.12) 0%, transparent 55%);
-}
+    .orb-a {
+      width: 700px;
+      height: 700px;
+      top: -260px;
+      right: -200px;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 230, 110, 0.55) 0%, rgba(100, 230, 0, 0.30) 45%, transparent 70%);
+      animation: floatA 14s ease-in-out infinite alternate;
+    }
 
-.hero-inner {
-  position:relative; z-index:2;
-  max-width:1360px; margin:0 auto;
-  padding:9rem 3rem 5rem;
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:5rem; align-items:center;
-}
+    .orb-b {
+      width: 480px;
+      height: 480px;
+      bottom: -150px;
+      left: 60px;
+      background: radial-gradient(circle, rgba(184, 240, 0, 0.42) 0%, rgba(0, 210, 190, 0.20) 55%, transparent 70%);
+      animation: floatA 18s 2s ease-in-out infinite alternate;
+    }
 
-/* Left: text */
-.hero-chip {
-  display:inline-flex; align-items:center; gap:0.55rem;
-  padding:0.46rem 1.1rem;
-  background:rgba(184,240,0,0.09); border:1px solid rgba(184,240,0,0.28);
-  border-radius:var(--r2); font-family:var(--f-mono); font-size:0.70rem;
-  color:rgba(184,240,0,0.88); letter-spacing:0.06em; margin-bottom:1.8rem;
-  backdrop-filter:blur(8px);
-  animation:fadeUp 0.9s 0.05s var(--ez-out) both;
-}
-.hero-chip .dot {
-  width:6px; height:6px; border-radius:50%;
-  background:var(--acid); box-shadow:0 0 9px var(--acid);
-  animation:blink 1.5s infinite;
-}
+    .orb-c {
+      width: 300px;
+      height: 300px;
+      top: 35%;
+      left: 32%;
+      background: radial-gradient(circle, rgba(240, 176, 0, 0.45) 0%, transparent 70%);
+      animation: floatA 11s 1s ease-in-out infinite alternate;
+    }
 
-.hero-h1 {
-  font-family:var(--f-display); font-weight:800;
-  font-size:clamp(3.2rem,6.5vw,5.6rem); line-height:1.04;
-  color:#fff; letter-spacing:-0.045em;
-  text-shadow:0 2px 32px rgba(0,0,0,0.22);
-  animation:fadeUp 0.9s 0.14s var(--ez-out) both;
-}
-.hero-h1 em {
-  font-style:normal;
-  background:linear-gradient(125deg,#8ef040 0%,#c8ff00 45%,#e0ff80 100%);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 28px rgba(184,240,0,0.50));
-}
-.hero-h1 .latin { font-size:0.80em; letter-spacing:-0.055em; display:block; }
+    .orb-d {
+      width: 220px;
+      height: 220px;
+      top: 10%;
+      left: 18%;
+      background: radial-gradient(circle, rgba(144, 96, 240, 0.35) 0%, transparent 70%);
+      animation: floatA 9s 0.5s ease-in-out infinite alternate;
+    }
 
-.hero-sub {
-  font-size:1.08rem; color:rgba(255,255,255,0.68);
-  margin:1.5rem 0 2.4rem; font-weight:400; line-height:1.9;
-  animation:fadeUp 0.9s 0.22s var(--ez-out) both;
-}
+    @keyframes floatA {
+      from {
+        transform: translateY(0) scale(1);
+      }
 
-.hero-cmd {
-  font-family:var(--f-mono); font-size:0.82rem;
-  color:rgba(184,240,0,0.78); margin-bottom:2rem;
-  animation:fadeUp 0.9s 0.30s var(--ez-out) both;
-}
-.hero-cmd .str { color:var(--amber); }
-.caret { color:var(--acid); animation:blink 0.9s infinite; }
+      to {
+        transform: translateY(-36px) scale(1.07);
+      }
+    }
 
-.hero-actions {
-  display:flex; gap:1rem; flex-wrap:wrap;
-  animation:fadeUp 0.9s 0.38s var(--ez-out) both;
-}
+    /* Atmosphere */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 60% 55% at 82% 8%, rgba(0, 212, 240, 0.16) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 8% 88%, rgba(184, 240, 0, 0.15) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 45% at 65% 70%, rgba(144, 96, 240, 0.12) 0%, transparent 55%);
+    }
 
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(28px); }
-  to   { opacity:1; transform:translateY(0); }
-}
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 9rem 3rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
 
-.btn-fill {
-  padding:0.96rem 2.3rem; border:none; border-radius:var(--r3);
-  font-family:var(--f-display); font-size:0.92rem; font-weight:700;
-  color:#fff; cursor:pointer; letter-spacing:0.02em;
-  background:linear-gradient(135deg,#1f3a14,#3d6e22,#5a9030);
-  box-shadow:0 6px 24px rgba(20,70,10,0.48), var(--glow-dk);
-  position:relative; overflow:hidden;
-  transition:all 0.35s var(--ez-spring);
-}
-.btn-fill::after {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.14),transparent);
-  transform:translateX(-120%); transition:transform 0.55s;
-}
-.btn-fill:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 14px 36px rgba(20,70,10,0.58),var(--glow-dk); }
-.btn-fill:hover::after { transform:translateX(120%); }
-.btn-fill:active { transform:scale(0.97); }
+    /* Left: text */
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.46rem 1.1rem;
+      background: rgba(184, 240, 0, 0.09);
+      border: 1px solid rgba(184, 240, 0, 0.28);
+      border-radius: var(--r2);
+      font-family: var(--f-mono);
+      font-size: 0.70rem;
+      color: rgba(184, 240, 0, 0.88);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.8rem;
+      backdrop-filter: blur(8px);
+      animation: fadeUp 0.9s 0.05s var(--ez-out) both;
+    }
 
-.btn-ghost {
-  padding:0.96rem 2.3rem; border:1.5px solid rgba(184,240,0,0.35);
-  border-radius:var(--r3); font-family:var(--f-mono); font-size:0.80rem;
-  font-weight:500; color:rgba(184,240,0,0.88);
-  background:rgba(184,240,0,0.07); cursor:pointer; letter-spacing:0.03em;
-  backdrop-filter:blur(12px);
-  transition:all 0.3s var(--ez-smooth);
-}
-.btn-ghost:hover {
-  background:rgba(184,240,0,0.14); border-color:rgba(184,240,0,0.65);
-  box-shadow:var(--glow-acid); transform:translateY(-2px);
-}
+    .hero-chip .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 9px var(--acid);
+      animation: blink 1.5s infinite;
+    }
 
-/* Right: terminal */
-.hero-right {
-  display:flex; flex-direction:column; gap:1rem;
-  animation:fadeUp 0.9s 0.22s var(--ez-out) both;
-}
+    .hero-h1 {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(3.2rem, 6.5vw, 5.6rem);
+      line-height: 1.04;
+      color: #fff;
+      letter-spacing: -0.045em;
+      text-shadow: 0 2px 32px rgba(0, 0, 0, 0.22);
+      animation: fadeUp 0.9s 0.14s var(--ez-out) both;
+    }
 
-.terminal {
-  background:rgba(5,10,5,0.88); backdrop-filter:blur(24px);
-  border:1px solid rgba(184,240,0,0.14); border-radius:var(--r4);
-  overflow:hidden; box-shadow:var(--sh-dk), var(--glow-acid);
-  position:relative;
-}
-.terminal::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:1.5px;
-  background:linear-gradient(90deg,transparent 0%,var(--mint) 25%,var(--acid) 55%,var(--sky) 80%,transparent 100%);
-  background-size:200%; animation:slide 4s linear infinite;
-}
-@keyframes slide { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+    .hero-h1 em {
+      font-style: normal;
+      background: linear-gradient(125deg, #8ef040 0%, #c8ff00 45%, #e0ff80 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 28px rgba(184, 240, 0, 0.50));
+    }
 
-.term-bar {
-  padding:0.78rem 1.2rem; background:rgba(0,0,0,0.38);
-  display:flex; align-items:center; gap:0.5rem;
-  border-bottom:1px solid rgba(255,255,255,0.05);
-}
-.tc { width:11px;height:11px;border-radius:50%; }
-.tc-r{background:#ff5f57;box-shadow:0 0 5px rgba(255,95,87,0.5);}
-.tc-y{background:#febc2e;box-shadow:0 0 5px rgba(254,188,46,0.5);}
-.tc-g{background:#28c840;box-shadow:0 0 5px rgba(40,200,64,0.5);}
-.term-name {
-  font-family:var(--f-mono); font-size:0.70rem;
-  color:rgba(255,255,255,0.35); margin-right:auto; letter-spacing:0.04em;
-}
+    .hero-h1 .latin {
+      font-size: 0.80em;
+      letter-spacing: -0.055em;
+      display: block;
+    }
 
-.term-body {
-  padding:1.5rem; font-family:var(--f-mono); font-size:0.78rem; line-height:1.95;
-}
-.tp  { color:rgba(184,240,0,0.70); }
-.tc2 { color:#d8e8cc; }
-.to  { color:rgba(255,255,255,0.38); display:block; padding-right:1rem; }
-.ts  { color:var(--mint); }
-.tw  { color:var(--amber); }
-.ti  { color:var(--sky); }
-.tb  { display:block; height:0.4rem; }
+    .hero-sub {
+      font-size: 1.08rem;
+      color: rgba(255, 255, 255, 0.68);
+      margin: 1.5rem 0 2.4rem;
+      font-weight: 400;
+      line-height: 1.9;
+      animation: fadeUp 0.9s 0.22s var(--ez-out) both;
+    }
 
-/* Stats row */
-.hero-stats {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem;
-}
-.stat-box {
-  background:rgba(255,255,255,0.06); backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,0.09); border-radius:var(--r3);
-  padding:1.1rem 0.8rem; text-align:center;
-  transition:all 0.3s var(--ez-smooth);
-}
-.stat-box:hover { background:rgba(255,255,255,0.10); border-color:rgba(184,240,0,0.18); transform:translateY(-3px); }
-.stat-n {
-  font-family:var(--f-display); font-size:1.75rem; font-weight:800;
-  letter-spacing:-0.04em; display:block;
-  background:linear-gradient(135deg,#c89000,#f0b000,#ffe060);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-}
-.stat-l { font-family:var(--f-mono); font-size:0.64rem; color:rgba(255,255,255,0.44); margin-top:0.2rem; letter-spacing:0.04em; }
+    .hero-cmd {
+      font-family: var(--f-mono);
+      font-size: 0.82rem;
+      color: rgba(184, 240, 0, 0.78);
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s 0.30s var(--ez-out) both;
+    }
 
-/* Scroll hint */
-.scroll-hint {
-  position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:0.45rem;
-  z-index:5; animation:bob 2.8s ease-in-out infinite;
-}
-.scroll-hint span { font-family:var(--f-mono); font-size:0.62rem; color:rgba(255,255,255,0.32); letter-spacing:0.1em; }
-.scroll-line { width:1px; height:48px; background:linear-gradient(to bottom,rgba(184,240,0,0.75),transparent); }
-@keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+    .hero-cmd .str {
+      color: var(--amber);
+    }
 
-/* ════════════════════════════════════════════════════
+    .caret {
+      color: var(--acid);
+      animation: blink 0.9s infinite;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.9s 0.38s var(--ez-out) both;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn-fill {
+      padding: 0.96rem 2.3rem;
+      border: none;
+      border-radius: var(--r3);
+      font-family: var(--f-display);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #1f3a14, #3d6e22, #5a9030);
+      box-shadow: 0 6px 24px rgba(20, 70, 10, 0.48), var(--glow-dk);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s var(--ez-spring);
+    }
+
+    .btn-fill::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+      transform: translateX(-120%);
+      transition: transform 0.55s;
+    }
+
+    .btn-fill:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 36px rgba(20, 70, 10, 0.58), var(--glow-dk);
+    }
+
+    .btn-fill:hover::after {
+      transform: translateX(120%);
+    }
+
+    .btn-fill:active {
+      transform: scale(0.97);
+    }
+
+    .btn-ghost {
+      padding: 0.96rem 2.3rem;
+      border: 1.5px solid rgba(184, 240, 0, 0.35);
+      border-radius: var(--r3);
+      font-family: var(--f-mono);
+      font-size: 0.80rem;
+      font-weight: 500;
+      color: rgba(184, 240, 0, 0.88);
+      background: rgba(184, 240, 0, 0.07);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s var(--ez-smooth);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(184, 240, 0, 0.14);
+      border-color: rgba(184, 240, 0, 0.65);
+      box-shadow: var(--glow-acid);
+      transform: translateY(-2px);
+    }
+
+    /* Right: terminal */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      animation: fadeUp 0.9s 0.22s var(--ez-out) both;
+    }
+
+    .terminal {
+      background: rgba(5, 10, 5, 0.88);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(184, 240, 0, 0.14);
+      border-radius: var(--r4);
+      overflow: hidden;
+      box-shadow: var(--sh-dk), var(--glow-acid);
+      position: relative;
+    }
+
+    .terminal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, var(--mint) 25%, var(--acid) 55%, var(--sky) 80%, transparent 100%);
+      background-size: 200%;
+      animation: slide 4s linear infinite;
+    }
+
+    @keyframes slide {
+      0% {
+        background-position: -200% 0
+      }
+
+      100% {
+        background-position: 200% 0
+      }
+    }
+
+    .term-bar {
+      padding: 0.78rem 1.2rem;
+      background: rgba(0, 0, 0, 0.38);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tc {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .tc-r {
+      background: #ff5f57;
+      box-shadow: 0 0 5px rgba(255, 95, 87, 0.5);
+    }
+
+    .tc-y {
+      background: #febc2e;
+      box-shadow: 0 0 5px rgba(254, 188, 46, 0.5);
+    }
+
+    .tc-g {
+      background: #28c840;
+      box-shadow: 0 0 5px rgba(40, 200, 64, 0.5);
+    }
+
+    .term-name {
+      font-family: var(--f-mono);
+      font-size: 0.70rem;
+      color: rgba(255, 255, 255, 0.35);
+      margin-right: auto;
+      letter-spacing: 0.04em;
+    }
+
+    .term-body {
+      padding: 1.5rem;
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      line-height: 1.95;
+    }
+
+    .tp {
+      color: rgba(184, 240, 0, 0.70);
+    }
+
+    .tc2 {
+      color: #d8e8cc;
+    }
+
+    .to {
+      color: rgba(255, 255, 255, 0.38);
+      display: block;
+      padding-right: 1rem;
+    }
+
+    .ts {
+      color: var(--mint);
+    }
+
+    .tw {
+      color: var(--amber);
+    }
+
+    .ti {
+      color: var(--sky);
+    }
+
+    .tb {
+      display: block;
+      height: 0.4rem;
+    }
+
+    /* Stats row */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--r3);
+      padding: 1.1rem 0.8rem;
+      text-align: center;
+      transition: all 0.3s var(--ez-smooth);
+    }
+
+    .stat-box:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(184, 240, 0, 0.18);
+      transform: translateY(-3px);
+    }
+
+    .stat-n {
+      font-family: var(--f-display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      display: block;
+      background: linear-gradient(135deg, #c89000, #f0b000, #ffe060);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-l {
+      font-family: var(--f-mono);
+      font-size: 0.64rem;
+      color: rgba(255, 255, 255, 0.44);
+      margin-top: 0.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Scroll hint */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.45rem;
+      z-index: 5;
+      animation: bob 2.8s ease-in-out infinite;
+    }
+
+    .scroll-hint span {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      color: rgba(255, 255, 255, 0.32);
+      letter-spacing: 0.1em;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(184, 240, 0, 0.75), transparent);
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0)
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(10px)
+      }
+    }
+
+    /* ════════════════════════════════════════════════════
    MARQUEE
 ════════════════════════════════════════════════════ */
-.marquee-wrap {
-  direction:ltr; position:relative; overflow:hidden;
-  padding:14px 0; background:var(--s2);
-  border-top:1px solid var(--b-gr); border-bottom:1px solid var(--b-gr);
-}
-.marquee-wrap::before,.marquee-wrap::after {
-  content:''; position:absolute; top:0;bottom:0; width:160px; z-index:5; pointer-events:none;
-}
-.marquee-wrap::before { left:0; background:linear-gradient(90deg,var(--s2),transparent); }
-.marquee-wrap::after  { right:0; background:linear-gradient(270deg,var(--s2),transparent); }
+    .marquee-wrap {
+      direction: ltr;
+      position: relative;
+      overflow: hidden;
+      padding: 14px 0;
+      background: var(--s2);
+      border-top: 1px solid var(--b-gr);
+      border-bottom: 1px solid var(--b-gr);
+    }
 
-.marquee-track { display:flex; width:max-content; gap:0; }
-.marquee-track.fwd { animation:mFwd 40s linear infinite; }
-.marquee-track.rev { animation:mRev 50s linear infinite; margin-top:8px; }
+    .marquee-wrap::before,
+    .marquee-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 160px;
+      z-index: 5;
+      pointer-events: none;
+    }
 
-@keyframes mFwd { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-@keyframes mRev { from{transform:translateX(-50%)} to{transform:translateX(0)} }
+    .marquee-wrap::before {
+      left: 0;
+      background: linear-gradient(90deg, var(--s2), transparent);
+    }
 
-.m-item { display:inline-flex; align-items:center; padding:0 6px; }
-.m-pill {
-  display:inline-flex; align-items:center; gap:6px;
-  padding:5px 14px; border-radius:var(--r1);
-  font-family:var(--f-mono); font-size:0.68rem; font-weight:500;
-  letter-spacing:0.05em; background:#fff;
-  border:1px solid rgba(80,130,60,0.20);
-  box-shadow:0 1px 3px rgba(10,30,10,0.07);
-  transition:transform 0.2s var(--ez-spring), box-shadow 0.2s;
-  color:var(--txt2);
-}
-.m-pill:hover { transform:translateY(-2px); box-shadow:var(--sh-sm); }
+    .marquee-wrap::after {
+      right: 0;
+      background: linear-gradient(270deg, var(--s2), transparent);
+    }
 
-/* Pill variants */
-.mp-g  { border-left:3px solid var(--acid);   color:#3d6e10; }
-.mp-m  { border-left:3px solid var(--mint);   color:#065e44; }
-.mp-s  { border-left:3px solid var(--sky);    color:#065668; }
-.mp-a  { border-left:3px solid var(--amber);  color:#7a4600; }
-.mp-v  { border-left:3px solid var(--violet); color:#44208a; }
-.mp-r  { border-left:3px solid var(--rose);   color:#8a0030; }
-.mp-f  { border-left:3px solid #6a9040;       color:#2a4a18; }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 0;
+    }
 
-.m-dot { width:4px; height:4px; border-radius:50%; background:currentColor; opacity:0.50; flex-shrink:0; }
-.m-sep { color:rgba(80,130,60,0.25); font-size:0.5rem; padding:0 10px; font-family:var(--f-mono); }
+    .marquee-track.fwd {
+      animation: mFwd 40s linear infinite;
+    }
 
-/* ════════════════════════════════════════════════════
+    .marquee-track.rev {
+      animation: mRev 50s linear infinite;
+      margin-top: 8px;
+    }
+
+    @keyframes mFwd {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    @keyframes mRev {
+      from {
+        transform: translateX(-50%)
+      }
+
+      to {
+        transform: translateX(0)
+      }
+    }
+
+    .m-item {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 6px;
+    }
+
+    .m-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: var(--r1);
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      background: #fff;
+      border: 1px solid rgba(80, 130, 60, 0.20);
+      box-shadow: 0 1px 3px rgba(10, 30, 10, 0.07);
+      transition: transform 0.2s var(--ez-spring), box-shadow 0.2s;
+      color: var(--txt2);
+    }
+
+    .m-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sh-sm);
+    }
+
+    /* Pill variants */
+    .mp-g {
+      border-left: 3px solid var(--acid);
+      color: #3d6e10;
+    }
+
+    .mp-m {
+      border-left: 3px solid var(--mint);
+      color: #065e44;
+    }
+
+    .mp-s {
+      border-left: 3px solid var(--sky);
+      color: #065668;
+    }
+
+    .mp-a {
+      border-left: 3px solid var(--amber);
+      color: #7a4600;
+    }
+
+    .mp-v {
+      border-left: 3px solid var(--violet);
+      color: #44208a;
+    }
+
+    .mp-r {
+      border-left: 3px solid var(--rose);
+      color: #8a0030;
+    }
+
+    .mp-f {
+      border-left: 3px solid #6a9040;
+      color: #2a4a18;
+    }
+
+    .m-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.50;
+      flex-shrink: 0;
+    }
+
+    .m-sep {
+      color: rgba(80, 130, 60, 0.25);
+      font-size: 0.5rem;
+      padding: 0 10px;
+      font-family: var(--f-mono);
+    }
+
+    /* ════════════════════════════════════════════════════
    SECTION COMMONS
 ════════════════════════════════════════════════════ */
-.sec { padding:8rem 3rem; }
-.sec-inner { max-width:1360px; margin:0 auto; }
+    .sec {
+      padding: 8rem 3rem;
+    }
 
-.sec-chip {
-  display:inline-flex; align-items:center; gap:0.45rem;
-  padding:0.38rem 1rem;
-  background:linear-gradient(135deg,rgba(80,130,60,0.14),rgba(184,240,0,0.08));
-  border:1px solid rgba(80,130,60,0.28); border-radius:var(--r2);
-  font-family:var(--f-mono); font-size:0.68rem; font-weight:600;
-  color:var(--txt3); letter-spacing:0.10em; text-transform:uppercase;
-  margin-bottom:1.4rem;
-}
+    .sec-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+    }
 
-.sec-h2 {
-  font-family:var(--f-display); font-weight:800;
-  font-size:clamp(2.4rem,4.5vw,3.4rem); line-height:1.10;
-  color:var(--txt1); letter-spacing:-0.04em; margin-bottom:1.2rem;
-}
-.sec-h2 em { font-style:normal; background:linear-gradient(125deg,#3d8020,#6ab030,#9ed050); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .sec-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.38rem 1rem;
+      background: linear-gradient(135deg, rgba(80, 130, 60, 0.14), rgba(184, 240, 0, 0.08));
+      border: 1px solid rgba(80, 130, 60, 0.28);
+      border-radius: var(--r2);
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--txt3);
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
 
-.sec-sub { font-size:1.05rem; color:var(--txt4); line-height:1.95; font-weight:400; max-width:560px; }
+    .sec-h2 {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+      line-height: 1.10;
+      color: var(--txt1);
+      letter-spacing: -0.04em;
+      margin-bottom: 1.2rem;
+    }
 
-/* Light variants for dark sections */
-.light .sec-chip {
-  background:rgba(184,240,0,0.10); border-color:rgba(184,240,0,0.24); color:rgba(184,240,0,0.82);
-}
-.light .sec-h2 { color:#fff; }
-.light .sec-h2 em { background:linear-gradient(125deg,var(--acid),#dcff70); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.light .sec-sub { color:rgba(255,255,255,0.55); }
+    .sec-h2 em {
+      font-style: normal;
+      background: linear-gradient(125deg, #3d8020, #6ab030, #9ed050);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-/* Reveal animation */
-.rv { opacity:0; transform:translateY(26px); transition:opacity 0.70s var(--ez-out), transform 0.70s var(--ez-out); }
-.rv.in { opacity:1; transform:translateY(0); }
-.rv-d1{transition-delay:0.08s} .rv-d2{transition-delay:0.16s} .rv-d3{transition-delay:0.24s} .rv-d4{transition-delay:0.32s}
+    .sec-sub {
+      font-size: 1.05rem;
+      color: var(--txt4);
+      line-height: 1.95;
+      font-weight: 400;
+      max-width: 560px;
+    }
 
-/* ════════════════════════════════════════════════════
+    /* Light variants for dark sections */
+    .light .sec-chip {
+      background: rgba(184, 240, 0, 0.10);
+      border-color: rgba(184, 240, 0, 0.24);
+      color: rgba(184, 240, 0, 0.82);
+    }
+
+    .light .sec-h2 {
+      color: #fff;
+    }
+
+    .light .sec-h2 em {
+      background: linear-gradient(125deg, var(--acid), #dcff70);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .light .sec-sub {
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    /* Reveal animation */
+    .rv {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.70s var(--ez-out), transform 0.70s var(--ez-out);
+    }
+
+    .rv.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rv-d1 {
+      transition-delay: 0.08s
+    }
+
+    .rv-d2 {
+      transition-delay: 0.16s
+    }
+
+    .rv-d3 {
+      transition-delay: 0.24s
+    }
+
+    .rv-d4 {
+      transition-delay: 0.32s
+    }
+
+    /* ════════════════════════════════════════════════════
    EVENTS
 ════════════════════════════════════════════════════ */
-.sec-events { background:linear-gradient(180deg,var(--surface) 0%, var(--s2) 100%); }
+    .sec-events {
+      background: linear-gradient(180deg, var(--surface) 0%, var(--s2) 100%);
+    }
 
-.events-grid {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:1.6rem; margin-top:3.5rem;
-}
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.6rem;
+      margin-top: 3.5rem;
+    }
 
-/* Card base */
-.e-card {
-  background:#fff; border-radius:var(--r4); overflow:hidden;
-  border:1px solid var(--b-gr); box-shadow:var(--sh-md);
-  transition:all 0.50s var(--ez-smooth);
-  position:relative; display:flex; flex-direction:column;
-}
-.e-card::before {
-  content:''; position:absolute; top:0;left:0;right:0; height:2px;
-  background:linear-gradient(90deg,#3d6e22,#6aaa30,#8ed048);
-  transform:scaleX(0); transform-origin:right;
-  transition:transform 0.4s var(--ez-smooth);
-}
-.e-card:hover { transform:translateY(-8px) scale(1.006); box-shadow:var(--sh-xl); }
-.e-card:hover::before { transform:scaleX(1); transform-origin:left; }
+    /* Card base */
+    .e-card {
+      background: #fff;
+      border-radius: var(--r4);
+      overflow: hidden;
+      border: 1px solid var(--b-gr);
+      box-shadow: var(--sh-md);
+      transition: all 0.50s var(--ez-smooth);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
 
-/* Featured */
-.e-card.big {
-  grid-column:1/3; flex-direction:row;
-  background:linear-gradient(148deg,#080e08,#0f1e10,#152816);
-  border-color:rgba(184,240,0,0.16);
-  box-shadow:var(--sh-dk), var(--glow-acid);
-}
-.e-card.big::before {
-  background:linear-gradient(90deg,var(--mint),var(--acid),var(--sky));
-  background-size:200%; animation:slide 3.5s linear infinite;
-  transform:scaleX(1); transform-origin:left;
-}
-.e-card.big:hover { transform:translateY(-6px); }
+    .e-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #3d6e22, #6aaa30, #8ed048);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s var(--ez-smooth);
+    }
 
-.big-left { padding:2.4rem; flex:1; }
-.big-right {
-  width:220px; flex-shrink:0;
-  background:rgba(184,240,0,0.06); border-right:1px solid rgba(184,240,0,0.12);
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  gap:1.5rem; padding:2rem 1rem;
-}
-.big-stat-item { text-align:center; }
-.big-stat-num {
-  font-family:var(--f-display); font-size:2.2rem; font-weight:800;
-  letter-spacing:-0.04em;
-  background:linear-gradient(135deg,var(--acid),#80e020);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  display:block;
-}
-.big-stat-lbl { font-family:var(--f-mono); font-size:0.64rem; color:rgba(255,255,255,0.40); letter-spacing:0.05em; }
-.big-divider { width:40px; height:1px; background:rgba(184,240,0,0.20); }
+    .e-card:hover {
+      transform: translateY(-8px) scale(1.006);
+      box-shadow: var(--sh-xl);
+    }
 
-.e-head { padding:1.8rem 1.8rem 1.2rem; display:flex; align-items:flex-start; justify-content:space-between; gap:0.8rem; }
-.e-card.big .e-head { padding:0 0 1.6rem 0; }
+    .e-card:hover::before {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
-.e-badge {
-  display:inline-flex; align-items:center; gap:0.35rem;
-  padding:0.28rem 0.85rem; border-radius:var(--r1);
-  font-family:var(--f-mono); font-size:0.65rem; font-weight:600;
-  letter-spacing:0.07em; flex-shrink:0;
-}
-.eb-hack { background:rgba(184,240,0,0.12); color:var(--acid); border:1px solid rgba(184,240,0,0.28); }
-.eb-work { background:rgba(0,212,240,0.12); color:var(--sky); border:1px solid rgba(0,212,240,0.28); }
-.eb-talk { background:rgba(240,176,0,0.14); color:var(--amber); border:1px solid rgba(240,176,0,0.30); }
-.eb-meet { background:rgba(144,96,240,0.14); color:#c8a8ff; border:1px solid rgba(144,96,240,0.30); }
-.eb-comp { background:rgba(240,64,96,0.14); color:#ff9aaa; border:1px solid rgba(240,64,96,0.30); }
-.eb-sess { background:rgba(80,130,60,0.14); color:#6aaa50; border:1px solid rgba(80,130,60,0.30); }
+    /* Featured */
+    .e-card.big {
+      grid-column: 1/3;
+      flex-direction: row;
+      background: linear-gradient(148deg, #080e08, #0f1e10, #152816);
+      border-color: rgba(184, 240, 0, 0.16);
+      box-shadow: var(--sh-dk), var(--glow-acid);
+    }
 
-.e-date {
-  font-family:var(--f-mono); font-size:0.65rem; color:var(--txt4);
-  background:var(--s2); border:1px solid var(--b-gr); border-radius:var(--r2);
-  padding:0.32rem 0.75rem; white-space:nowrap; flex-shrink:0;
-}
-.e-card.big .e-date { background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.48); border-color:rgba(255,255,255,0.10); }
+    .e-card.big::before {
+      background: linear-gradient(90deg, var(--mint), var(--acid), var(--sky));
+      background-size: 200%;
+      animation: slide 3.5s linear infinite;
+      transform: scaleX(1);
+      transform-origin: left;
+    }
 
-.e-body { padding:0 1.8rem 1.8rem; flex:1; display:flex; flex-direction:column; }
-.e-card.big .e-body { padding:0; }
+    .e-card.big:hover {
+      transform: translateY(-6px);
+    }
 
-.e-title {
-  font-family:var(--f-display); font-size:1.08rem; font-weight:700;
-  color:var(--txt1); line-height:1.30; margin-bottom:0.55rem; letter-spacing:-0.02em;
-}
-.e-card.big .e-title { color:#fff; font-size:1.4rem; }
+    .big-left {
+      padding: 2.4rem;
+      flex: 1;
+    }
 
-.e-desc {
-  font-size:0.87rem; color:var(--txt3); line-height:1.85;
-  font-weight:400; margin-bottom:1.2rem; flex:1;
-}
-.e-card.big .e-desc { color:rgba(255,255,255,0.56); }
+    .big-right {
+      width: 220px;
+      flex-shrink: 0;
+      background: rgba(184, 240, 0, 0.06);
+      border-right: 1px solid rgba(184, 240, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+    }
 
-.e-meta { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:1.4rem; }
-.e-meta-i {
-  display:flex; align-items:center; gap:0.35rem;
-  font-size:0.78rem; color:var(--txt4); font-family:var(--f-body);
-}
-.e-card.big .e-meta-i { color:rgba(255,255,255,0.45); }
+    .big-stat-item {
+      text-align: center;
+    }
 
-.e-btn {
-  align-self:flex-start; padding:0.66rem 1.5rem; border:none;
-  border-radius:var(--r2); font-family:var(--f-display); font-size:0.82rem;
-  font-weight:700; cursor:pointer; letter-spacing:0.02em;
-  transition:all 0.3s var(--ez-spring);
-}
-.eb-green {
-  background:linear-gradient(135deg,#1f3a14,#3d6e22,#5a9030);
-  color:#fff; box-shadow:0 3px 14px rgba(20,70,10,0.38);
-}
-.eb-green:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(20,70,10,0.52),var(--glow-dk); }
+    .big-stat-num {
+      font-family: var(--f-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--acid), #80e020);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+    }
 
-.eb-outline {
-  background:rgba(184,240,0,0.08); color:var(--acid);
-  border:1.5px solid rgba(184,240,0,0.30);
-}
-.eb-outline:hover { background:rgba(184,240,0,0.16); border-color:rgba(184,240,0,0.60); box-shadow:var(--glow-acid); transform:translateY(-2px); }
+    .big-stat-lbl {
+      font-family: var(--f-mono);
+      font-size: 0.64rem;
+      color: rgba(255, 255, 255, 0.40);
+      letter-spacing: 0.05em;
+    }
 
-/* ════════════════════════════════════════════════════
+    .big-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(184, 240, 0, 0.20);
+    }
+
+    .e-head {
+      padding: 1.8rem 1.8rem 1.2rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.8rem;
+    }
+
+    .e-card.big .e-head {
+      padding: 0 0 1.6rem 0;
+    }
+
+    .e-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.85rem;
+      border-radius: var(--r1);
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      flex-shrink: 0;
+    }
+
+    .eb-hack {
+      background: rgba(184, 240, 0, 0.12);
+      color: var(--acid);
+      border: 1px solid rgba(184, 240, 0, 0.28);
+    }
+
+    .eb-work {
+      background: rgba(0, 212, 240, 0.12);
+      color: var(--sky);
+      border: 1px solid rgba(0, 212, 240, 0.28);
+    }
+
+    .eb-talk {
+      background: rgba(240, 176, 0, 0.14);
+      color: var(--amber);
+      border: 1px solid rgba(240, 176, 0, 0.30);
+    }
+
+    .eb-meet {
+      background: rgba(144, 96, 240, 0.14);
+      color: #c8a8ff;
+      border: 1px solid rgba(144, 96, 240, 0.30);
+    }
+
+    .eb-comp {
+      background: rgba(240, 64, 96, 0.14);
+      color: #ff9aaa;
+      border: 1px solid rgba(240, 64, 96, 0.30);
+    }
+
+    .eb-sess {
+      background: rgba(80, 130, 60, 0.14);
+      color: #6aaa50;
+      border: 1px solid rgba(80, 130, 60, 0.30);
+    }
+
+    .e-date {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      color: var(--txt4);
+      background: var(--s2);
+      border: 1px solid var(--b-gr);
+      border-radius: var(--r2);
+      padding: 0.32rem 0.75rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .e-card.big .e-date {
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.48);
+      border-color: rgba(255, 255, 255, 0.10);
+    }
+
+    .e-body {
+      padding: 0 1.8rem 1.8rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .e-card.big .e-body {
+      padding: 0;
+    }
+
+    .e-title {
+      font-family: var(--f-display);
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--txt1);
+      line-height: 1.30;
+      margin-bottom: 0.55rem;
+      letter-spacing: -0.02em;
+    }
+
+    .e-card.big .e-title {
+      color: #fff;
+      font-size: 1.4rem;
+    }
+
+    .e-desc {
+      font-size: 0.87rem;
+      color: var(--txt3);
+      line-height: 1.85;
+      font-weight: 400;
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+
+    .e-card.big .e-desc {
+      color: rgba(255, 255, 255, 0.56);
+    }
+
+    .e-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .e-meta-i {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      color: var(--txt4);
+      font-family: var(--f-body);
+    }
+
+    .e-card.big .e-meta-i {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .e-btn {
+      align-self: flex-start;
+      padding: 0.66rem 1.5rem;
+      border: none;
+      border-radius: var(--r2);
+      font-family: var(--f-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: all 0.3s var(--ez-spring);
+    }
+
+    .eb-green {
+      background: linear-gradient(135deg, #1f3a14, #3d6e22, #5a9030);
+      color: #fff;
+      box-shadow: 0 3px 14px rgba(20, 70, 10, 0.38);
+    }
+
+    .eb-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(20, 70, 10, 0.52), var(--glow-dk);
+    }
+
+    .eb-outline {
+      background: rgba(184, 240, 0, 0.08);
+      color: var(--acid);
+      border: 1.5px solid rgba(184, 240, 0, 0.30);
+    }
+
+    .eb-outline:hover {
+      background: rgba(184, 240, 0, 0.16);
+      border-color: rgba(184, 240, 0, 0.60);
+      box-shadow: var(--glow-acid);
+      transform: translateY(-2px);
+    }
+
+    /* ════════════════════════════════════════════════════
    TEAM
 ════════════════════════════════════════════════════ */
-.sec-team {
-  background:linear-gradient(158deg,
-    #030806 0%,#060f07 10%,
-    #091806 20%,#0c2e0e 32%,
-    #0a5030 46%,#086878 60%,
-    #083060 74%,#120848 88%,#1c0840 100%);
-  position:relative; overflow:hidden;
-}
-.sec-team::before {
-  content:''; position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 60% at -10% 50%, rgba(184,240,0,0.10),transparent 65%),
-    radial-gradient(ellipse 50% 50% at 110% 50%, rgba(0,212,240,0.09),transparent 65%);
-}
-.team-grid-dots {
-  position:absolute; inset:0; pointer-events:none;
-  background-image:linear-gradient(rgba(184,240,0,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(184,240,0,0.04)1px,transparent 1px);
-  background-size:52px 52px;
-}
+    .sec-team {
+      background: linear-gradient(158deg,
+          #030806 0%, #060f07 10%,
+          #091806 20%, #0c2e0e 32%,
+          #0a5030 46%, #086878 60%,
+          #083060 74%, #120848 88%, #1c0840 100%);
+      position: relative;
+      overflow: hidden;
+    }
 
-.team-grid {
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:1.3rem; margin-top:3.5rem;
-}
+    .sec-team::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 60% at -10% 50%, rgba(184, 240, 0, 0.10), transparent 65%),
+        radial-gradient(ellipse 50% 50% at 110% 50%, rgba(0, 212, 240, 0.09), transparent 65%);
+    }
 
-.m-card {
-  background:rgba(255,255,255,0.05); backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,0.09); border-radius:var(--r4);
-  padding:2rem 1.5rem; text-align:center;
-  transition:all 0.45s var(--ez-smooth); position:relative; overflow:hidden;
-}
-.m-card::before {
-  content:''; position:absolute; top:0;left:0;right:0; height:2px;
-  opacity:0; transition:opacity 0.3s;
-}
-.mc1::before{background:linear-gradient(90deg,var(--acid),var(--mint));}
-.mc2::before{background:linear-gradient(90deg,var(--amber),var(--rose));}
-.mc3::before{background:linear-gradient(90deg,var(--sky),#b090ff);}
-.mc4::before{background:linear-gradient(90deg,var(--acid),var(--amber));}
-.mc5::before{background:linear-gradient(90deg,#b090ff,var(--rose));}
-.mc6::before{background:linear-gradient(90deg,var(--mint),var(--sky));}
-.mc7::before{background:linear-gradient(90deg,var(--amber),var(--sky));}
-.mc8::before{background:linear-gradient(90deg,var(--acid),#b090ff);}
+    .team-grid-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(184, 240, 0, 0.04)1px, transparent 1px), linear-gradient(90deg, rgba(184, 240, 0, 0.04)1px, transparent 1px);
+      background-size: 52px 52px;
+    }
 
-.m-card:hover {
-  background:rgba(255,255,255,0.09); transform:translateY(-8px);
-  box-shadow:0 22px 50px rgba(0,0,0,0.38),0 6px 16px rgba(0,0,0,0.22);
-  border-color:rgba(255,255,255,0.14);
-}
-.m-card:hover::before { opacity:1; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.3rem;
+      margin-top: 3.5rem;
+    }
 
-.m-avatar {
-  width:72px; height:72px; border-radius:50%;
-  margin:0 auto 1.1rem; display:flex; align-items:center; justify-content:center;
-  font-size:1.8rem; background:rgba(255,255,255,0.07);
-  position:relative;
-}
-.m-avatar::after {
-  content:''; position:absolute; inset:-3px; border-radius:50%;
-  background:conic-gradient(var(--acid),var(--mint),var(--sky),var(--amber),var(--rose),var(--violet),var(--acid));
-  z-index:-1; animation:spin 6s linear infinite; filter:blur(1.5px); opacity:0.75;
-}
-@keyframes spin { to{transform:rotate(360deg)} }
+    .m-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--r4);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.45s var(--ez-smooth);
+      position: relative;
+      overflow: hidden;
+    }
 
-.m-name { font-family:var(--f-display); font-size:0.96rem; font-weight:700; color:#fff; margin-bottom:0.28rem; letter-spacing:-0.01em; }
-.m-role { font-family:var(--f-mono); font-size:0.66rem; color:rgba(184,240,0,0.70); margin-bottom:0.9rem; letter-spacing:0.04em; }
+    .m-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
 
-.m-tags { display:flex; flex-wrap:wrap; justify-content:center; gap:0.35rem; }
-.m-tag {
-  font-family:var(--f-mono); font-size:0.60rem; padding:0.18rem 0.58rem;
-  border-radius:4px; background:rgba(255,255,255,0.07);
-  color:rgba(255,255,255,0.48); border:1px solid rgba(255,255,255,0.09);
-  letter-spacing:0.03em; transition:all 0.2s;
-}
-.m-tag:hover { background:rgba(184,240,0,0.10); color:var(--acid); border-color:rgba(184,240,0,0.24); }
+    .mc1::before {
+      background: linear-gradient(90deg, var(--acid), var(--mint));
+    }
 
-/* ════════════════════════════════════════════════════
+    .mc2::before {
+      background: linear-gradient(90deg, var(--amber), var(--rose));
+    }
+
+    .mc3::before {
+      background: linear-gradient(90deg, var(--sky), #b090ff);
+    }
+
+    .mc4::before {
+      background: linear-gradient(90deg, var(--acid), var(--amber));
+    }
+
+    .mc5::before {
+      background: linear-gradient(90deg, #b090ff, var(--rose));
+    }
+
+    .mc6::before {
+      background: linear-gradient(90deg, var(--mint), var(--sky));
+    }
+
+    .mc7::before {
+      background: linear-gradient(90deg, var(--amber), var(--sky));
+    }
+
+    .mc8::before {
+      background: linear-gradient(90deg, var(--acid), #b090ff);
+    }
+
+    .m-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+      transform: translateY(-8px);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38), 0 6px 16px rgba(0, 0, 0, 0.22);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .m-card:hover::before {
+      opacity: 1;
+    }
+
+    .m-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      background: rgba(255, 255, 255, 0.07);
+      position: relative;
+    }
+
+    .m-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(var(--acid), var(--mint), var(--sky), var(--amber), var(--rose), var(--violet), var(--acid));
+      z-index: -1;
+      animation: spin 6s linear infinite;
+      filter: blur(1.5px);
+      opacity: 0.75;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .m-name {
+      font-family: var(--f-display);
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.28rem;
+      letter-spacing: -0.01em;
+    }
+
+    .m-role {
+      font-family: var(--f-mono);
+      font-size: 0.66rem;
+      color: rgba(184, 240, 0, 0.70);
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+
+    .m-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .m-tag {
+      font-family: var(--f-mono);
+      font-size: 0.60rem;
+      padding: 0.18rem 0.58rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.07);
+      color: rgba(255, 255, 255, 0.48);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+    }
+
+    .m-tag:hover {
+      background: rgba(184, 240, 0, 0.10);
+      color: var(--acid);
+      border-color: rgba(184, 240, 0, 0.24);
+    }
+
+    /* ════════════════════════════════════════════════════
    ACHIEVEMENTS
 ════════════════════════════════════════════════════ */
-.sec-ach { background:var(--surface); }
+    .sec-ach {
+      background: var(--surface);
+    }
 
-.ach-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3.5rem; }
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
 
-.ach-card {
-  background:#dde8c6;
-  border-radius:var(--r4); padding:2rem;
-  box-shadow: 9px 9px 22px rgba(68,110,40,0.24),-9px -9px 22px rgba(255,255,255,0.90),inset 0 1px 0 rgba(255,255,255,0.80);
-  transition:all 0.45s var(--ez-smooth); position:relative; overflow:hidden;
-}
-.ach-card::before {
-  content:''; position:absolute; inset:0; border-radius:var(--r4);
-  background:linear-gradient(150deg,rgba(255,255,255,0.65) 0%,transparent 52%);
-  pointer-events:none;
-}
-.ach-card:hover { transform:translateY(-5px); box-shadow:14px 14px 34px rgba(68,110,40,0.28),-4px -4px 14px rgba(255,255,255,0.90); }
+    .ach-card {
+      background: #dde8c6;
+      border-radius: var(--r4);
+      padding: 2rem;
+      box-shadow: 9px 9px 22px rgba(68, 110, 40, 0.24), -9px -9px 22px rgba(255, 255, 255, 0.90), inset 0 1px 0 rgba(255, 255, 255, 0.80);
+      transition: all 0.45s var(--ez-smooth);
+      position: relative;
+      overflow: hidden;
+    }
 
-.ach-rank {
-  font-family:var(--f-display); font-size:3.4rem; font-weight:800;
-  line-height:1; margin-bottom:0.45rem; letter-spacing:-0.05em;
-}
-.rk-g { background:linear-gradient(135deg,#1c1100,#c08000,#f0d050,#fff8c0); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.rk-s { background:linear-gradient(135deg,#7a8898,#b8c8d8,#e8f0f8); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.rk-b { background:linear-gradient(135deg,#6c2e00,#c86000,#f08030); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .ach-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--r4);
+      background: linear-gradient(150deg, rgba(255, 255, 255, 0.65) 0%, transparent 52%);
+      pointer-events: none;
+    }
 
-.ach-title { font-family:var(--f-display); font-size:1.05rem; font-weight:700; color:var(--txt1); margin-bottom:0.35rem; letter-spacing:-0.02em; }
-.ach-event { font-family:var(--f-mono); font-size:0.70rem; color:var(--txt3); margin-bottom:0.65rem; letter-spacing:0.04em; }
-.ach-desc { font-size:0.85rem; color:var(--txt3); line-height:1.80; font-weight:400; }
+    .ach-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 14px 14px 34px rgba(68, 110, 40, 0.28), -4px -4px 14px rgba(255, 255, 255, 0.90);
+    }
 
-/* ════════════════════════════════════════════════════
+    .ach-rank {
+      font-family: var(--f-display);
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.05em;
+    }
+
+    .rk-g {
+      background: linear-gradient(135deg, #1c1100, #c08000, #f0d050, #fff8c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .rk-s {
+      background: linear-gradient(135deg, #7a8898, #b8c8d8, #e8f0f8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .rk-b {
+      background: linear-gradient(135deg, #6c2e00, #c86000, #f08030);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .ach-title {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--txt1);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.02em;
+    }
+
+    .ach-event {
+      font-family: var(--f-mono);
+      font-size: 0.70rem;
+      color: var(--txt3);
+      margin-bottom: 0.65rem;
+      letter-spacing: 0.04em;
+    }
+
+    .ach-desc {
+      font-size: 0.85rem;
+      color: var(--txt3);
+      line-height: 1.80;
+      font-weight: 400;
+    }
+
+    /* ════════════════════════════════════════════════════
    CTA
 ════════════════════════════════════════════════════ */
-.sec-cta {
-  background:linear-gradient(150deg,
-    #030806 0%,#061408 14%,#0e3c18 28%,
-    #0c5840 42%,#087878 58%,#0a3870 74%,
-    #180c60 88%,#220a58 100%);
-  text-align:center; position:relative; overflow:hidden;
-}
-.sec-cta::before {
-  content:''; position:absolute; inset:0; pointer-events:none;
-  background:
-    radial-gradient(ellipse 55% 60% at 12% 50%, rgba(240,176,0,0.20),transparent 60%),
-    radial-gradient(ellipse 55% 60% at 88% 50%, rgba(184,240,0,0.15),transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(144,96,240,0.12),transparent 55%);
-}
-.sec-cta::after {
-  content:''; position:absolute; inset:0; pointer-events:none;
-  background-image:linear-gradient(rgba(184,240,0,0.04)1px,transparent 1px),linear-gradient(90deg,rgba(184,240,0,0.04)1px,transparent 1px);
-  background-size:56px 56px;
-}
-.cta-inner { max-width:720px; margin:0 auto; position:relative; z-index:2; }
-.cta-h2 {
-  font-family:var(--f-display); font-weight:800;
-  font-size:clamp(2.4rem,5vw,3.8rem); color:#fff;
-  line-height:1.14; letter-spacing:-0.045em; margin-bottom:1.4rem;
-}
-.cta-h2 em {
-  font-style:normal;
-  background:linear-gradient(125deg,var(--acid),#d8ff60);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  filter:drop-shadow(0 0 22px rgba(184,240,0,0.50));
-}
-.cta-p { font-size:1.05rem; color:rgba(255,255,255,0.62); line-height:1.95; margin-bottom:2.8rem; font-weight:400; }
-.cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .sec-cta {
+      background: linear-gradient(150deg,
+          #030806 0%, #061408 14%, #0e3c18 28%,
+          #0c5840 42%, #087878 58%, #0a3870 74%,
+          #180c60 88%, #220a58 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-/* ════════════════════════════════════════════════════
+    .sec-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 60% at 12% 50%, rgba(240, 176, 0, 0.20), transparent 60%),
+        radial-gradient(ellipse 55% 60% at 88% 50%, rgba(184, 240, 0, 0.15), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(144, 96, 240, 0.12), transparent 55%);
+    }
+
+    .sec-cta::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(184, 240, 0, 0.04)1px, transparent 1px), linear-gradient(90deg, rgba(184, 240, 0, 0.04)1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    .cta-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-h2 {
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: #fff;
+      line-height: 1.14;
+      letter-spacing: -0.045em;
+      margin-bottom: 1.4rem;
+    }
+
+    .cta-h2 em {
+      font-style: normal;
+      background: linear-gradient(125deg, var(--acid), #d8ff60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 22px rgba(184, 240, 0, 0.50));
+    }
+
+    .cta-p {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.62);
+      line-height: 1.95;
+      margin-bottom: 2.8rem;
+      font-weight: 400;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ════════════════════════════════════════════════════
    FOOTER
 ════════════════════════════════════════════════════ */
-footer {
-  background:linear-gradient(180deg,#030906,#010503);
-  padding:4.5rem 3rem 3rem; color:rgba(255,255,255,0.42); position:relative;
-}
-footer::before {
-  content:''; position:absolute; top:0;left:0;right:0; height:1.5px;
-  background:linear-gradient(90deg,transparent 0%,rgba(184,240,0,0.48) 25%,rgba(0,212,240,0.44) 55%,rgba(240,176,0,0.40) 80%,transparent 100%);
-}
+    footer {
+      background: linear-gradient(180deg, #030906, #010503);
+      padding: 4.5rem 3rem 3rem;
+      color: rgba(255, 255, 255, 0.42);
+      position: relative;
+    }
 
-.footer-grid {
-  max-width:1360px; margin:0 auto;
-  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:4rem;
-}
-.f-brand-row { display:flex; align-items:center; gap:0.7rem; margin-bottom:1rem; }
-.f-desc { font-size:0.86rem; line-height:1.90; font-weight:400; max-width:290px; }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent 0%, rgba(184, 240, 0, 0.48) 25%, rgba(0, 212, 240, 0.44) 55%, rgba(240, 176, 0, 0.40) 80%, transparent 100%);
+    }
 
-.f-col h5 {
-  color:#fff; font-family:var(--f-display); font-weight:700;
-  font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.3rem;
-}
-.f-col ul { list-style:none; }
-.f-col li { margin-bottom:0.72rem; }
-.f-col a {
-  color:rgba(255,255,255,0.38); text-decoration:none; font-size:0.85rem;
-  transition:color 0.25s, letter-spacing 0.25s;
-}
-.f-col a:hover { color:rgba(184,240,0,0.80); letter-spacing:0.01em; }
+    .footer-grid {
+      max-width: 1360px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+    }
 
-.footer-bottom {
-  max-width:1360px; margin:3rem auto 0;
-  padding-top:1.8rem; border-top:1px solid rgba(255,255,255,0.06);
-  display:flex; justify-content:space-between; align-items:center;
-  font-size:0.80rem;
-}
-.f-code { font-family:var(--f-mono); font-size:0.74rem; color:rgba(184,240,0,0.52); letter-spacing:0.05em; }
+    .f-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
 
-/* ════════════════════════════════════════════════════
+    .f-desc {
+      font-size: 0.86rem;
+      line-height: 1.90;
+      font-weight: 400;
+      max-width: 290px;
+    }
+
+    .f-col h5 {
+      color: #fff;
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.3rem;
+    }
+
+    .f-col ul {
+      list-style: none;
+    }
+
+    .f-col li {
+      margin-bottom: 0.72rem;
+    }
+
+    .f-col a {
+      color: rgba(255, 255, 255, 0.38);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.25s, letter-spacing 0.25s;
+    }
+
+    .f-col a:hover {
+      color: rgba(184, 240, 0, 0.80);
+      letter-spacing: 0.01em;
+    }
+
+    .footer-bottom {
+      max-width: 1360px;
+      margin: 3rem auto 0;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.80rem;
+    }
+
+    .f-code {
+      font-family: var(--f-mono);
+      font-size: 0.74rem;
+      color: rgba(184, 240, 0, 0.52);
+      letter-spacing: 0.05em;
+    }
+
+    /* ════════════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════════════ */
-@media(max-width:1100px){
-  .nav { padding:0 1.5rem; }
-  .hero-inner { grid-template-columns:1fr; gap:3rem; padding:8rem 1.5rem 4rem; }
-  .hero-right { display:none; }
-  .sec { padding:5.5rem 1.5rem; }
-  .events-grid { grid-template-columns:1fr; }
-  .e-card.big { flex-direction:column; grid-column:auto; }
-  .big-right { width:100%; flex-direction:row; flex-wrap:wrap; padding:1.5rem; }
-  .bento { grid-template-columns:1fr 1fr; }
-  .p1,.p2,.p3,.p4,.p5,.p6,.p7,.p8,.p9 { grid-column:auto; grid-row:auto; }
-  .team-grid { grid-template-columns:1fr 1fr; }
-  .ach-grid { grid-template-columns:1fr 1fr; }
-  .footer-grid { grid-template-columns:1fr 1fr; gap:2.5rem; }
-}
-@media(max-width:700px){
-  .nav-links { display:none; }
-  .nav-status { display:none; }
-  .bento,.team-grid,.ach-grid { grid-template-columns:1fr; }
-  .footer-grid { grid-template-columns:1fr; }
-  .big-num .number { font-size:4rem; }
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
-}
-</style>
+    @media(max-width:1100px) {
+      .nav {
+        padding: 0 1.5rem;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .sec {
+        padding: 5.5rem 1.5rem;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .e-card.big {
+        flex-direction: column;
+        grid-column: auto;
+      }
+
+      .big-right {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 1.5rem;
+      }
+
+      .bento {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .p1,
+      .p2,
+      .p3,
+      .p4,
+      .p5,
+      .p6,
+      .p7,
+      .p8,
+      .p9 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ach-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media(max-width:700px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-status {
+        display: none;
+      }
+
+      .bento,
+      .team-grid,
+      .ach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .big-num .number {
+        font-size: 4rem;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ══ NAV ══ -->
-<nav class="nav" id="nav">
-  <a class="nav-logo" href="#">
-    <div class="nav-logo-mark">🫒</div>
-    <div>
-      <span class="nav-logo-text">Zaytoonic Coders</span>
-      <span class="nav-logo-sub">جامعة الزيتونة الأردنية</span>
+  <!-- ══ NAV ══ -->
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="#">
+      <div class="nav-logo-mark">🫒</div>
+      <div>
+        <span class="nav-logo-text">Zaytoonic Coders</span>
+        <span class="nav-logo-sub">جامعة الزيتونة الأردنية</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#events">الفعاليات</a></li>
+      <li><a href="#about">عن الفريق</a></li>
+      <li><a href="#team">الأعضاء</a></li>
+      <li><a href="#achievements">الإنجازات</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <span class="nav-status"><span class="dot"></span>v2.0.25</span>
+      <button class="nav-btn">انضم للفريق</button>
     </div>
-  </a>
+  </nav>
 
-  <ul class="nav-links">
-    <li><a href="#events">الفعاليات</a></li>
-    <li><a href="#about">عن الفريق</a></li>
-    <li><a href="#team">الأعضاء</a></li>
-    <li><a href="#achievements">الإنجازات</a></li>
-  </ul>
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-diag"></div>
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+    <div class="orb orb-d"></div>
 
-  <div class="nav-right">
-    <span class="nav-status"><span class="dot"></span>v2.0.25</span>
-    <button class="nav-btn">انضم للفريق</button>
-  </div>
-</nav>
-
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-diag"></div>
-  <div class="orb orb-a"></div>
-  <div class="orb orb-b"></div>
-  <div class="orb orb-c"></div>
-  <div class="orb orb-d"></div>
-
-  <div class="hero-inner">
-    <!-- Left -->
-    <div class="hero-text">
-      <div class="hero-chip">
-        <span class="dot"></span>
-        النادي التقني النشط في الحرم الجامعي
-      </div>
-      <h1 class="hero-h1">
-        نبني،<br>
-        <em>نتعلم،</em><br>
-        <span class="latin">We Code.</span>
-      </h1>
-      <p class="hero-sub">
-        مجتمع المبرمجين في جامعة الزيتونة الأردنية —<br>
-        حيث تتحول الأفكار إلى كود، والشغف إلى مشاريع حقيقية.
-      </p>
-      <div class="hero-cmd">
-        $ git commit -m <span class="str">"join Zaytoonic Coders"</span><span class="caret">_</span>
-      </div>
-      <div class="hero-actions">
-        <button class="btn-fill">انضم للفريق 🫒</button>
-        <button class="btn-ghost">$ view --events</button>
-      </div>
-    </div>
-
-    <!-- Right -->
-    <div class="hero-right">
-      <div class="terminal">
-        <div class="term-bar">
-          <span class="tc tc-r"></span>
-          <span class="tc tc-y"></span>
-          <span class="tc tc-g"></span>
-          <span class="term-name">zaytoonic@zu.edu.jo ~ bash</span>
+    <div class="hero-inner">
+      <!-- Left -->
+      <div class="hero-text">
+        <div class="hero-chip">
+          <span class="dot"></span>
+          النادي التقني النشط في الحرم الجامعي
         </div>
-        <div class="term-body">
-          <span><span class="tp">➜ zaytoonic </span><span class="tc2">npm run start</span></span>
-          <span class="to">Initializing Zaytoonic Coders v2.0.25...</span>
-          <span class="ts">✓ Members loaded: 120 coders</span>
-          <span class="ts">✓ Events scheduled: 8 upcoming</span>
-          <span class="ti">◉ Hackathon season: ACTIVE</span>
-          <span class="tb"></span>
-          <span><span class="tp">➜ </span><span class="tc2">whoami</span></span>
-          <span class="to">Passionate. Collaborative. Zaytoonic.</span>
-          <span class="tb"></span>
-          <span><span class="tp">➜ </span><span class="tc2">git log --oneline</span></span>
-          <span class="tw">🏆 1st Place — JoHackathon 2024</span>
-          <span class="ts">🥈 2nd Place — TechArena Jordan</span>
-          <span class="ti">📦 12 open source projects</span>
-          <span class="tb"></span>
-          <span><span class="tp">➜ </span><span class="caret">_</span></span>
+        <h1 class="hero-h1">
+          نبني،<br>
+          <em>نتعلم،</em><br>
+          <span class="latin">We Code.</span>
+        </h1>
+        <p class="hero-sub">
+          مجتمع المبرمجين في جامعة الزيتونة الأردنية —<br>
+          حيث تتحول الأفكار إلى كود، والشغف إلى مشاريع حقيقية.
+        </p>
+        <div class="hero-cmd">
+          $ git commit -m <span class="str">"join Zaytoonic Coders"</span><span class="caret">_</span>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-fill">انضم للفريق 🫒</button>
+          <button class="btn-ghost">$ view --events</button>
         </div>
       </div>
 
-      <div class="hero-stats">
-        <div class="stat-box"><span class="stat-n">120+</span><div class="stat-l">عضو نشط</div></div>
-        <div class="stat-box"><span class="stat-n">34</span><div class="stat-l">فعالية هذا العام</div></div>
-        <div class="stat-box"><span class="stat-n">12</span><div class="stat-l">مشروع مفتوح</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <span>scroll</span>
-  </div>
-</section>
-
-<!-- ══ MARQUEE ══ -->
-<div class="marquee-wrap">
-  <div class="marquee-track fwd">
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Full-Stack Dev</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-o"><span class="m-dot"></span>System Design</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Data Structures</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Cloud Native</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Design Patterns</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>Open Source</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>DevOps Pipeline</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Docker & K8s</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Git & GitHub</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Clean Architecture</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>RESTful APIs</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Scalable Systems</span><span class="m-sep">◆</span></div>
-    <!-- duplicate -->
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Full-Stack Dev</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-o"><span class="m-dot"></span>System Design</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Data Structures</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Cloud Native</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Design Patterns</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>Open Source</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>DevOps Pipeline</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Docker & K8s</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Git & GitHub</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Clean Architecture</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>RESTful APIs</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Scalable Systems</span><span class="m-sep">◆</span></div>
-  </div>
-
-  <div class="marquee-track rev">
-    <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>LLM Integration</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>Unit Testing</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Machine Learning</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>AI Ethics</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Algorithms</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>SOLID Principles</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Vector Databases</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Neural Networks</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>Prompt Engineering</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Clean Code</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Agile Mentality</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>API First Design</span><span class="m-sep">◆</span></div>
-    <!-- duplicate -->
-    <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>LLM Integration</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>Unit Testing</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Machine Learning</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>AI Ethics</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Algorithms</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>SOLID Principles</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Vector Databases</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Neural Networks</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>Prompt Engineering</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Clean Code</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Agile Mentality</span><span class="m-sep">◆</span></div>
-    <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>API First Design</span><span class="m-sep">◆</span></div>
-  </div>
-</div>
-
-<!-- ══ EVENTS ══ -->
-<section class="sec sec-events" id="events">
-  <div class="sec-inner">
-    <div class="rv">
-      <div class="sec-chip">📅 upcoming_events</div>
-      <h2 class="sec-h2">فعاليات وأنشطة<br><em>الفريق</em></h2>
-      <p class="sec-sub">من الهاكاثونات إلى ورش العمل والمحاضرات — دائماً في حركة، دائماً نتعلم.</p>
-    </div>
-
-    <div class="events-grid">
-      <!-- Featured -->
-      <div class="e-card big rv rv-d1">
-        <div class="big-right">
-          <div class="big-stat-item">
-            <span class="big-stat-num">48h</span>
-            <div class="big-stat-lbl">مدة المنافسة</div>
+      <!-- Right -->
+      <div class="hero-right">
+        <div class="terminal">
+          <div class="term-bar">
+            <span class="tc tc-r"></span>
+            <span class="tc tc-y"></span>
+            <span class="tc tc-g"></span>
+            <span class="term-name">zaytoonic@zu.edu.jo ~ bash</span>
           </div>
-          <div class="big-divider"></div>
-          <div class="big-stat-item">
-            <span class="big-stat-num">1K</span>
-            <div class="big-stat-lbl">جوائز دينار</div>
-          </div>
-          <div class="big-divider"></div>
-          <div class="big-stat-item">
-            <span class="big-stat-num">200+</span>
-            <div class="big-stat-lbl">مشارك</div>
+          <div class="term-body">
+            <span><span class="tp">➜ zaytoonic </span><span class="tc2">npm run start</span></span>
+            <span class="to">Initializing Zaytoonic Coders v2.0.25...</span>
+            <span class="ts">✓ Members loaded: 120 coders</span>
+            <span class="ts">✓ Events scheduled: 8 upcoming</span>
+            <span class="ti">◉ Hackathon season: ACTIVE</span>
+            <span class="tb"></span>
+            <span><span class="tp">➜ </span><span class="tc2">whoami</span></span>
+            <span class="to">Passionate. Collaborative. Zaytoonic.</span>
+            <span class="tb"></span>
+            <span><span class="tp">➜ </span><span class="tc2">git log --oneline</span></span>
+            <span class="tw">🏆 1st Place — JoHackathon 2024</span>
+            <span class="ts">🥈 2nd Place — TechArena Jordan</span>
+            <span class="ti">📦 12 open source projects</span>
+            <span class="tb"></span>
+            <span><span class="tp">➜ </span><span class="caret">_</span></span>
           </div>
         </div>
-        <div class="big-left">
-          <div class="e-head" style="padding:0 0 1.4rem 0;">
-            <span class="e-badge eb-hack">⚡ HACKATHON</span>
-            <span class="e-date">15 مارس 2025</span>
+
+        <div class="hero-stats">
+          <div class="stat-box"><span class="stat-n">120+</span>
+            <div class="stat-l">عضو نشط</div>
           </div>
-          <div class="e-title" style="color:#fff;font-size:1.5rem;">ZayHack 2025 — بناء الغد بالكود</div>
-          <div class="e-desc" style="color:rgba(255,255,255,0.58);">الهاكاثون السنوي الكبير لفريق Zaytoonic Coders! 48 ساعة من الكود المتواصل، تحديات حقيقية، وجوائز تصل إلى 1000 دينار. انضم بفريق من 3-4 أشخاص وأثبت نفسك.</div>
-          <div class="e-meta">
-            <span class="e-meta-i">📍 قاعة الابتكار — الجامعة</span>
-            <span class="e-meta-i">⏰ 48 ساعة</span>
-            <span class="e-meta-i">🏆 جوائز نقدية</span>
+          <div class="stat-box"><span class="stat-n">34</span>
+            <div class="stat-l">فعالية هذا العام</div>
           </div>
-          <button class="e-btn eb-outline">$ register --now</button>
-        </div>
-      </div>
-
-      <!-- Workshop -->
-      <div class="e-card rv">
-        <div class="e-head">
-          <span class="e-badge eb-work">🛠️ WORKSHOP</span>
-          <span class="e-date">22 فبراير 2025</span>
-        </div>
-        <div class="e-body">
-          <div class="e-title">ورشة React & Next.js من الصفر</div>
-          <div class="e-desc">تعلم بناء تطبيقات ويب حديثة مع أفضل أدوات الجيل الجديد. مستوى مبتدئ-متوسط.</div>
-          <div class="e-meta">
-            <span class="e-meta-i">📍 مختبر الحاسوب B3</span>
-            <span class="e-meta-i">⏰ 3 ساعات</span>
+          <div class="stat-box"><span class="stat-n">12</span>
+            <div class="stat-l">مشروع مفتوح</div>
           </div>
-          <button class="e-btn eb-green">سجّل الآن</button>
-        </div>
-      </div>
-
-      <!-- Talk -->
-      <div class="e-card rv rv-d1">
-        <div class="e-head">
-          <span class="e-badge eb-talk">🎙️ TECH TALK</span>
-          <span class="e-date">1 مارس 2025</span>
-        </div>
-        <div class="e-body">
-          <div class="e-title">الذكاء الاصطناعي في سوق العمل الأردني</div>
-          <div class="e-desc">محاضرة مع مهندس من Mawdoo3 حول AI وكيف تستعد لمستقبل التقنية محلياً.</div>
-          <div class="e-meta">
-            <span class="e-meta-i">📍 قاعة المحاضرات الكبرى</span>
-            <span class="e-meta-i">⏰ ساعتان</span>
-          </div>
-          <button class="e-btn eb-green">احجز مقعدك</button>
-        </div>
-      </div>
-
-      <!-- Meetup -->
-      <div class="e-card rv rv-d2">
-        <div class="e-head">
-          <span class="e-badge eb-meet">☕ MEETUP</span>
-          <span class="e-date">كل ثلاثاء</span>
-        </div>
-        <div class="e-body">
-          <div class="e-title">Weekly Code & Coffee ☕</div>
-          <div class="e-desc">جلسة أسبوعية غير رسمية نشارك فيها ما تعلمناه، نراجع كود بعضنا، ونبني صداقات برمجية.</div>
-          <div class="e-meta">
-            <span class="e-meta-i">📍 كافيتيريا الطلاب</span>
-            <span class="e-meta-i">⏰ 4–6 مساءً</span>
-          </div>
-          <button class="e-btn eb-green">انضم هذا الأسبوع</button>
-        </div>
-      </div>
-
-      <!-- Competition -->
-      <div class="e-card rv rv-d3">
-        <div class="e-head">
-          <span class="e-badge eb-comp">🏆 COMPETITION</span>
-          <span class="e-date">10 أبريل 2025</span>
-        </div>
-        <div class="e-body">
-          <div class="e-title">Competitive Programming Challenge</div>
-          <div class="e-desc">مسابقة خوارزميات داخلية — تأهل لتمثيل الجامعة في ACPC الأردن هذا العام.</div>
-          <div class="e-meta">
-            <span class="e-meta-i">📍 أونلاين + الجامعة</span>
-            <span class="e-meta-i">🏅 شهادات للفائزين</span>
-          </div>
-          <button class="e-btn eb-green">سجّل فريقك</button>
-        </div>
-      </div>
-
-      <!-- Session -->
-      <div class="e-card rv rv-d4">
-        <div class="e-head">
-          <span class="e-badge eb-sess">📖 SESSION</span>
-          <span class="e-date">28 فبراير 2025</span>
-        </div>
-        <div class="e-body">
-          <div class="e-title">مراجعة CV وإعداد LinkedIn للمبرمجين</div>
-          <div class="e-desc">ورشة عملية لمساعدة الطلاب على تحسين ملفاتهم الوظيفية والبدء في التوظيف التقني.</div>
-          <div class="e-meta">
-            <span class="e-meta-i">📍 غرفة المجموعات 201</span>
-            <span class="e-meta-i">👥 20 مقعداً فقط</span>
-          </div>
-          <button class="e-btn eb-green">احجز مقعدك</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ══ TEAM ══ -->
-<section class="sec sec-team light" id="team">
-  <div class="team-grid-dots"></div>
-  <div class="sec-inner" style="position:relative;z-index:2;">
-    <div class="rv">
-      <div class="sec-chip">👾 core_team</div>
-      <h2 class="sec-h2">العقول التي تبني<br><em>المستقبل</em></h2>
-      <p class="sec-sub">تعرّف على الفريق الأساسي الذي يقود مجتمع Zaytoonic Coders هذا العام.</p>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ══ MARQUEE ══ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track fwd">
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Full-Stack Dev</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-o"><span class="m-dot"></span>System Design</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Data Structures</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Cloud Native</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Design Patterns</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>Open Source</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>DevOps Pipeline</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Docker & K8s</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Git & GitHub</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Clean Architecture</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>RESTful APIs</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Scalable Systems</span><span
+          class="m-sep">◆</span></div>
+      <!-- duplicate -->
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Full-Stack Dev</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-o"><span class="m-dot"></span>System Design</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Data Structures</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Cloud Native</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Design Patterns</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>Open Source</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>DevOps Pipeline</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Docker & K8s</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Git & GitHub</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Clean Architecture</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>RESTful APIs</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Scalable Systems</span><span
+          class="m-sep">◆</span></div>
     </div>
 
-    <div class="team-grid">
-      <div class="m-card mc1 rv">
-        <div class="m-avatar">👩‍💻</div>
-        <div class="m-name">ندى النجار</div>
-        <div class="m-role">// President & Lead Dev</div>
-        <div class="m-tags"><span class="m-tag">AI Engineer</span><span class="m-tag">Python</span><span class="m-tag">Data Analysis</span></div>
-      </div>
-
-      <div class="m-card mc2 rv rv-d1">
-        <div class="m-avatar">👨‍💻</div>
-        <div class="m-name">عمار الحارون</div>
-        <div class="m-role">// VP & AI Lead</div>
-        <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">TensorFlow</span><span class="m-tag">ML</span></div>
-      </div>
-
-      <div class="m-card mc3 rv rv-d2">
-        <div class="m-avatar">👨‍🔬</div>
-        <div class="m-name">خالد الزير</div>
-        <div class="m-role">// AI Researcher</div>
-        <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">ML</span><span class="m-tag">Math</span></div>
-      </div>
-
-      <div class="m-card mc4 rv rv-d3">
-        <div class="m-avatar" style="font-size:1rem;font-weight:700;color:#fff;">AF</div>
-        <div class="m-name">عبدالرحمن فرحان</div>
-        <div class="m-role">// Software Architect</div>
-        <div class="m-tags"><span class="m-tag">Java</span><span class="m-tag">JakartaEE</span><span class="m-tag">OOP</span></div>
-      </div>
-
-      <div class="m-card mc5 rv">
-        <div class="m-avatar">👨‍🔧</div>
-        <div class="m-name">أمين</div>
-        <div class="m-role">// DevOps & Security</div>
-        <div class="m-tags"><span class="m-tag">Docker</span><span class="m-tag">Linux</span><span class="m-tag">CI/CD</span></div>
-      </div>
-
-      <div class="m-card mc6 rv rv-d1">
-        <div class="m-avatar">👨‍💼</div>
-        <div class="m-name">محمد زريفة</div>
-        <div class="m-role">// Software Engineer</div>
-        <div class="m-tags"><span class="m-tag">JavaScript</span><span class="m-tag">Node.js</span><span class="m-tag">React</span></div>
-      </div>
-
-      <div class="m-card mc7 rv rv-d2">
-        <div class="m-avatar">👨‍💻</div>
-        <div class="m-name">عبدالله فهيم</div>
-        <div class="m-role">// Software Engineer</div>
-        <div class="m-tags"><span class="m-tag">Next.js</span><span class="m-tag">TypeScript</span><span class="m-tag">ASP.NET</span></div>
-      </div>
-
-      <div class="m-card mc8 rv rv-d3">
-        <div class="m-avatar">🔐</div>
-        <div class="m-name">محمد عماد</div>
-        <div class="m-role">// Cybersecurity Eng.</div>
-        <div class="m-tags"><span class="m-tag">PHP</span><span class="m-tag">Linux</span><span class="m-tag">DevOps</span></div>
-      </div>
-
-      <div class="m-card mc1 rv">
-        <div class="m-avatar">🤖</div>
-        <div class="m-name">زين الدين</div>
-        <div class="m-role">// AI Engineer</div>
-        <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">PHP</span><span class="m-tag">Math</span></div>
-      </div>
-
-      <div class="m-card mc2 rv rv-d1">
-        <div class="m-avatar">👩‍🎨</div>
-        <div class="m-name">ريم</div>
-        <div class="m-role">// Software Engineer</div>
-        <div class="m-tags"><span class="m-tag">Laravel</span><span class="m-tag">UI/UX</span><span class="m-tag">PHP</span></div>
-      </div>
-
-      <div class="m-card mc3 rv rv-d2">
-        <div class="m-avatar">🎮</div>
-        <div class="m-name">خالد</div>
-        <div class="m-role">// AI Engineer</div>
-        <div class="m-tags"><span class="m-tag">Game Dev</span><span class="m-tag">Python</span><span class="m-tag">DSA</span></div>
-      </div>
-
-      <!-- Placeholder CTA card -->
-      <div class="m-card rv rv-d3" style="background:rgba(184,240,0,0.07);border-color:rgba(184,240,0,0.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
-        <div style="font-size:2.4rem;">➕</div>
-        <div class="m-name" style="color:rgba(184,240,0,0.80);">انضم للفريق</div>
-        <div style="font-family:var(--f-mono);font-size:0.68rem;color:rgba(255,255,255,0.40);text-align:center;line-height:1.7;">هل أنت طالب في الزيتونة؟<br>مكانك هنا.</div>
-        <button class="e-btn eb-outline" style="align-self:center;">$ join --now</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ ACHIEVEMENTS ══ -->
-<section class="sec sec-ach" id="achievements">
-  <div class="sec-inner">
-    <div class="rv">
-      <div class="sec-chip">🏅 achievements</div>
-      <h2 class="sec-h2">إنجازاتنا في<br><em>المنافسات</em></h2>
-      <p class="sec-sub">خمس سنوات من التنافس والبناء — سجل حافل بالفخر الجامعي.</p>
-    </div>
-
-    <div class="ach-grid">
-      <div class="ach-card rv">
-        <div class="ach-rank rk-g">🥇</div>
-        <div class="ach-title">JoHackathon 2024</div>
-        <div class="ach-event">// Amman, Jordan · Nov 2024</div>
-        <div class="ach-desc">المركز الأول بين 45 فريقاً من جامعات الأردن. مشروع منصة توظيف ذكية بالذكاء الاصطناعي.</div>
-        <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-o">AI</span><span class="tag tg-m">React</span><span class="tag tg-s">Python</span></div>
-      </div>
-
-      <div class="ach-card rv rv-d1">
-        <div class="ach-rank rk-s">🥈</div>
-        <div class="ach-title">TechArena Jordan</div>
-        <div class="ach-event">// Zarqa, Jordan · Mar 2024</div>
-        <div class="ach-desc">المركز الثاني في مسابقة تطوير التطبيقات. تطبيق لإدارة الجدول الجامعي للطلاب.</div>
-        <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-v">Flutter</span><span class="tag">Firebase</span></div>
-      </div>
-
-      <div class="ach-card rv rv-d2">
-        <div class="ach-rank rk-g">🥇</div>
-        <div class="ach-title">ZU Internal Hackathon</div>
-        <div class="ach-event">// Amman, Jordan · Dec 2023</div>
-        <div class="ach-desc">أول مكانين في الهاكاثون الداخلي السنوي. فريقان من Zaytoonic Coders على المنصة.</div>
-        <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-m">Node.js</span><span class="tag tg-s">MongoDB</span></div>
-      </div>
-
-      <div class="ach-card rv">
-        <div class="ach-rank rk-b">🥉</div>
-        <div class="ach-title">Arab Collegiate Programming</div>
-        <div class="ach-event">// Online · Oct 2023</div>
-        <div class="ach-desc">المركز الثالث في المنطقة في مسابقة البرمجة التنافسية على مستوى الجامعات العربية.</div>
-        <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-o">C++</span><span class="tag">Algorithms</span></div>
-      </div>
-
-      <div class="ach-card rv rv-d1">
-        <div class="ach-rank rk-s">🥈</div>
-        <div class="ach-title">Google Solution Challenge</div>
-        <div class="ach-event">// Global · Apr 2023</div>
-        <div class="ach-desc">ضمن أفضل 50 مشروع عالمياً — مشروع للصحة الرقمية في المجتمعات الريفية.</div>
-        <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-m">Firebase</span><span class="tag tg-s">Android</span></div>
-      </div>
-
-      <div class="ach-card rv rv-d2">
-        <div class="ach-rank rk-g" style="font-size:3.4rem;">🏆</div>
-        <div class="ach-title">Best Club Award 2024</div>
-        <div class="ach-event">// Amman, Jordan · Jun 2024</div>
-        <div class="ach-desc">جائزة أفضل نادي طلابي في جامعة الزيتونة لعام 2024 من قِبل مجلس الطلبة.</div>
-        <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-o">Award</span><span class="tag tg-m">Community</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CTA ══ -->
-<section class="sec sec-cta">
-  <div class="sec-inner">
-    <div class="cta-inner rv">
-      <h2 class="cta-h2">انضم إلى<br><em>Zaytoonic Coders</em></h2>
-      <p class="cta-p">سواء كنت مبتدئاً أو محترفاً — مكانك هنا.<br>كل ما تحتاجه هو الشغف بالكود والرغبة في التعلم.</p>
-      <div class="cta-btns">
-        <button class="btn-fill">انضم للفريق 🫒</button>
-        <button class="btn-ghost">$ join --team zaytoonic</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="f-brand-row">
-        <div class="nav-logo-mark">🫒</div>
-        <div>
-          <span class="nav-logo-text" style="font-family:var(--f-display);font-size:1rem;font-weight:800;color:#fff;letter-spacing:-0.03em;">Zaytoonic Coders</span>
-          <span class="nav-logo-sub" style="font-family:var(--f-mono);font-size:0.60rem;color:rgba(255,255,255,0.38);display:block;letter-spacing:0.04em;">جامعة الزيتونة الأردنية</span>
-        </div>
-      </div>
-      <p class="f-desc">مجتمع المبرمجين في جامعة الزيتونة الأردنية — نبني، نتعلم، ونلهم الجيل القادم من المطورين الأردنيين.</p>
-    </div>
-
-    <div class="f-col">
-      <h5>الفريق</h5>
-      <ul>
-        <li><a href="#">عن Zaytoonic</a></li>
-        <li><a href="#">الأعضاء</a></li>
-        <li><a href="#">الانضمام</a></li>
-        <li><a href="#">GitHub</a></li>
-      </ul>
-    </div>
-
-    <div class="f-col">
-      <h5>الفعاليات</h5>
-      <ul>
-        <li><a href="#">ZayHack 2025</a></li>
-        <li><a href="#">الورش</a></li>
-        <li><a href="#">المحاضرات</a></li>
-        <li><a href="#">التقويم</a></li>
-      </ul>
-    </div>
-
-    <div class="f-col">
-      <h5>تواصل</h5>
-      <ul>
-        <li><a href="#">Discord</a></li>
-        <li><a href="#">Instagram</a></li>
-        <li><a href="#">LinkedIn</a></li>
-        <li><a href="#">البريد الإلكتروني</a></li>
-      </ul>
+    <div class="marquee-track rev">
+      <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>LLM Integration</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>Unit Testing</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Machine Learning</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>AI Ethics</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Algorithms</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>SOLID Principles</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Vector Databases</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Neural Networks</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>Prompt Engineering</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Clean Code</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Agile Mentality</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>API First Design</span><span
+          class="m-sep">◆</span></div>
+      <!-- duplicate -->
+      <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>LLM Integration</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>Unit Testing</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Machine Learning</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>AI Ethics</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Algorithms</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-m"><span class="m-dot"></span>SOLID Principles</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-s"><span class="m-dot"></span>Vector Databases</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-a"><span class="m-dot"></span>Neural Networks</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-f"><span class="m-dot"></span>Prompt Engineering</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-g"><span class="m-dot"></span>Clean Code</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-v"><span class="m-dot"></span>Agile Mentality</span><span
+          class="m-sep">◆</span></div>
+      <div class="m-item"><span class="m-pill mp-r"><span class="m-dot"></span>API First Design</span><span
+          class="m-sep">◆</span></div>
     </div>
   </div>
 
-  <div class="footer-bottom">
-    <span>© 2025 Zaytoonic Coders — جامعة الزيتونة الأردنية. Built with 💚</span>
-    <span class="f-code">// keep_coding.forever()</span>
-  </div>
-</footer>
+  <!-- ══ EVENTS ══ -->
+  <section class="sec sec-events" id="events">
+    <div class="sec-inner">
+      <div class="rv">
+        <div class="sec-chip">📅 upcoming_events</div>
+        <h2 class="sec-h2">فعاليات وأنشطة<br><em>الفريق</em></h2>
+        <p class="sec-sub">من الهاكاثونات إلى ورش العمل والمحاضرات — دائماً في حركة، دائماً نتعلم.</p>
+      </div>
 
-<script>
-// Nav scroll
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), {passive:true});
+      <div class="events-grid">
+        <!-- Featured -->
+        <div class="e-card big rv rv-d1">
+          <div class="big-right">
+            <div class="big-stat-item">
+              <span class="big-stat-num">48h</span>
+              <div class="big-stat-lbl">مدة المنافسة</div>
+            </div>
+            <div class="big-divider"></div>
+            <div class="big-stat-item">
+              <span class="big-stat-num">1K</span>
+              <div class="big-stat-lbl">جوائز دينار</div>
+            </div>
+            <div class="big-divider"></div>
+            <div class="big-stat-item">
+              <span class="big-stat-num">200+</span>
+              <div class="big-stat-lbl">مشارك</div>
+            </div>
+          </div>
+          <div class="big-left">
+            <div class="e-head" style="padding:0 0 1.4rem 0;">
+              <span class="e-badge eb-hack">⚡ HACKATHON</span>
+              <span class="e-date">15 مارس 2025</span>
+            </div>
+            <div class="e-title" style="color:#fff;font-size:1.5rem;">ZayHack 2025 — بناء الغد بالكود</div>
+            <div class="e-desc" style="color:rgba(255,255,255,0.58);">الهاكاثون السنوي الكبير لفريق Zaytoonic Coders! 48
+              ساعة من الكود المتواصل، تحديات حقيقية، وجوائز تصل إلى 1000 دينار. انضم بفريق من 3-4 أشخاص وأثبت نفسك.
+            </div>
+            <div class="e-meta">
+              <span class="e-meta-i">📍 قاعة الابتكار — الجامعة</span>
+              <span class="e-meta-i">⏰ 48 ساعة</span>
+              <span class="e-meta-i">🏆 جوائز نقدية</span>
+            </div>
+            <button class="e-btn eb-outline">$ register --now</button>
+          </div>
+        </div>
 
-// Reveal on scroll
-const rvObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); } });
-}, { threshold: 0.08 });
-document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+        <!-- Workshop -->
+        <div class="e-card rv">
+          <div class="e-head">
+            <span class="e-badge eb-work">🛠️ WORKSHOP</span>
+            <span class="e-date">22 فبراير 2025</span>
+          </div>
+          <div class="e-body">
+            <div class="e-title">ورشة React & Next.js من الصفر</div>
+            <div class="e-desc">تعلم بناء تطبيقات ويب حديثة مع أفضل أدوات الجيل الجديد. مستوى مبتدئ-متوسط.</div>
+            <div class="e-meta">
+              <span class="e-meta-i">📍 مختبر الحاسوب B3</span>
+              <span class="e-meta-i">⏰ 3 ساعات</span>
+            </div>
+            <button class="e-btn eb-green">سجّل الآن</button>
+          </div>
+        </div>
 
-// Progress bars — trigger on scroll
-const progObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      const fill = e.target;
-      const w = fill.style.width;
-      fill.style.width = '0';
-      requestAnimationFrame(() => { fill.style.width = w; });
-      progObs.unobserve(fill);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.prog-fill').forEach(el => progObs.observe(el));
-</script>
+        <!-- Talk -->
+        <div class="e-card rv rv-d1">
+          <div class="e-head">
+            <span class="e-badge eb-talk">🎙️ TECH TALK</span>
+            <span class="e-date">1 مارس 2025</span>
+          </div>
+          <div class="e-body">
+            <div class="e-title">الذكاء الاصطناعي في سوق العمل الأردني</div>
+            <div class="e-desc">محاضرة مع مهندس من Mawdoo3 حول AI وكيف تستعد لمستقبل التقنية محلياً.</div>
+            <div class="e-meta">
+              <span class="e-meta-i">📍 قاعة المحاضرات الكبرى</span>
+              <span class="e-meta-i">⏰ ساعتان</span>
+            </div>
+            <button class="e-btn eb-green">احجز مقعدك</button>
+          </div>
+        </div>
+
+        <!-- Meetup -->
+        <div class="e-card rv rv-d2">
+          <div class="e-head">
+            <span class="e-badge eb-meet">☕ MEETUP</span>
+            <span class="e-date">كل ثلاثاء</span>
+          </div>
+          <div class="e-body">
+            <div class="e-title">Weekly Code & Coffee ☕</div>
+            <div class="e-desc">جلسة أسبوعية غير رسمية نشارك فيها ما تعلمناه، نراجع كود بعضنا، ونبني صداقات برمجية.
+            </div>
+            <div class="e-meta">
+              <span class="e-meta-i">📍 كافيتيريا الطلاب</span>
+              <span class="e-meta-i">⏰ 4–6 مساءً</span>
+            </div>
+            <button class="e-btn eb-green">انضم هذا الأسبوع</button>
+          </div>
+        </div>
+
+        <!-- Competition -->
+        <div class="e-card rv rv-d3">
+          <div class="e-head">
+            <span class="e-badge eb-comp">🏆 COMPETITION</span>
+            <span class="e-date">10 أبريل 2025</span>
+          </div>
+          <div class="e-body">
+            <div class="e-title">Competitive Programming Challenge</div>
+            <div class="e-desc">مسابقة خوارزميات داخلية — تأهل لتمثيل الجامعة في ACPC الأردن هذا العام.</div>
+            <div class="e-meta">
+              <span class="e-meta-i">📍 أونلاين + الجامعة</span>
+              <span class="e-meta-i">🏅 شهادات للفائزين</span>
+            </div>
+            <button class="e-btn eb-green">سجّل فريقك</button>
+          </div>
+        </div>
+
+        <!-- Session -->
+        <div class="e-card rv rv-d4">
+          <div class="e-head">
+            <span class="e-badge eb-sess">📖 SESSION</span>
+            <span class="e-date">28 فبراير 2025</span>
+          </div>
+          <div class="e-body">
+            <div class="e-title">مراجعة CV وإعداد LinkedIn للمبرمجين</div>
+            <div class="e-desc">ورشة عملية لمساعدة الطلاب على تحسين ملفاتهم الوظيفية والبدء في التوظيف التقني.</div>
+            <div class="e-meta">
+              <span class="e-meta-i">📍 غرفة المجموعات 201</span>
+              <span class="e-meta-i">👥 20 مقعداً فقط</span>
+            </div>
+            <button class="e-btn eb-green">احجز مقعدك</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ TEAM ══ -->
+  <section class="sec sec-team light" id="team">
+    <div class="team-grid-dots"></div>
+    <div class="sec-inner" style="position:relative;z-index:2;">
+      <div class="rv">
+        <div class="sec-chip">👾 core_team</div>
+        <h2 class="sec-h2">العقول التي تبني<br><em>المستقبل</em></h2>
+        <p class="sec-sub">تعرّف على الفريق الأساسي الذي يقود مجتمع Zaytoonic Coders هذا العام.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="m-card mc1 rv">
+          <div class="m-avatar">👩‍💻</div>
+          <div class="m-name">ندى النجار</div>
+          <div class="m-role">// President & Lead Dev</div>
+          <div class="m-tags"><span class="m-tag">AI Engineer</span><span class="m-tag">Python</span><span
+              class="m-tag">Data Analysis</span></div>
+        </div>
+
+        <div class="m-card mc2 rv rv-d1">
+          <div class="m-avatar">👨‍💻</div>
+          <div class="m-name">عمار الحارون</div>
+          <div class="m-role">// VP & AI Lead</div>
+          <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">TensorFlow</span><span
+              class="m-tag">ML</span></div>
+        </div>
+
+        <div class="m-card mc3 rv rv-d2">
+          <div class="m-avatar">👨‍🔬</div>
+          <div class="m-name">خالد الزير</div>
+          <div class="m-role">// AI Researcher</div>
+          <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">ML</span><span
+              class="m-tag">Math</span></div>
+        </div>
+
+        <div class="m-card mc4 rv rv-d3">
+          <div class="m-avatar" style="font-size:1rem;font-weight:700;color:#fff;">AF</div>
+          <div class="m-name">عبدالرحمن فرحان</div>
+          <div class="m-role">// Software Architect</div>
+          <div class="m-tags"><span class="m-tag">Java</span><span class="m-tag">JakartaEE</span><span
+              class="m-tag">OOP</span></div>
+        </div>
+
+        <div class="m-card mc4 rv rv-d3">
+          <div class="m-avatar" style="font-size:1rem;font-weight:700;color:#fff;">AF</div>
+          <div class="m-name">خديجة حزين</div>
+          <div class="m-role">AI Engineer</div>
+          <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">Machine Learning</span><span
+              class="m-tag">Mathematics</span></div>
+        </div>
+
+
+        <div class="m-card mc5 rv">
+          <div class="m-avatar">👨‍🔧</div>
+          <div class="m-name">أمين</div>
+          <div class="m-role">// DevOps & Security</div>
+          <div class="m-tags"><span class="m-tag">Docker</span><span class="m-tag">Linux</span><span
+              class="m-tag">CI/CD</span></div>
+        </div>
+
+        <div class="m-card mc6 rv rv-d1">
+          <div class="m-avatar">👨‍💼</div>
+          <div class="m-name">محمد زريفة</div>
+          <div class="m-role">// Software Engineer</div>
+          <div class="m-tags"><span class="m-tag">JavaScript</span><span class="m-tag">Node.js</span><span
+              class="m-tag">React</span></div>
+        </div>
+
+        <div class="m-card mc7 rv rv-d2">
+          <div class="m-avatar">👨‍💻</div>
+          <div class="m-name">عبدالله فهيم</div>
+          <div class="m-role">// Software Engineer</div>
+          <div class="m-tags"><span class="m-tag">Next.js</span><span class="m-tag">TypeScript</span><span
+              class="m-tag">ASP.NET</span></div>
+        </div>
+
+        <div class="m-card mc8 rv rv-d3">
+          <div class="m-avatar">🔐</div>
+          <div class="m-name">محمد عماد</div>
+          <div class="m-role">// Cybersecurity Eng.</div>
+          <div class="m-tags"><span class="m-tag">PHP</span><span class="m-tag">Linux</span><span
+              class="m-tag">DevOps</span></div>
+        </div>
+
+        <div class="m-card mc1 rv">
+          <div class="m-avatar">🤖</div>
+          <div class="m-name">زين الدين</div>
+          <div class="m-role">// AI Engineer</div>
+          <div class="m-tags"><span class="m-tag">Python</span><span class="m-tag">PHP</span><span
+              class="m-tag">Math</span></div>
+        </div>
+
+        <div class="m-card mc2 rv rv-d1">
+          <div class="m-avatar">👩‍🎨</div>
+          <div class="m-name">ريم</div>
+          <div class="m-role">// Software Engineer</div>
+          <div class="m-tags"><span class="m-tag">Laravel</span><span class="m-tag">UI/UX</span><span
+              class="m-tag">PHP</span></div>
+        </div>
+
+        <div class="m-card mc3 rv rv-d2">
+          <div class="m-avatar">🎮</div>
+          <div class="m-name">خالد</div>
+          <div class="m-role">// AI Engineer</div>
+          <div class="m-tags"><span class="m-tag">Game Dev</span><span class="m-tag">Python</span><span
+              class="m-tag">DSA</span></div>
+        </div>
+
+        <!-- Placeholder CTA card -->
+        <div class="m-card rv rv-d3"
+          style="background:rgba(184,240,0,0.07);border-color:rgba(184,240,0,0.18);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+          <div style="font-size:2.4rem;">➕</div>
+          <div class="m-name" style="color:rgba(184,240,0,0.80);">انضم للفريق</div>
+          <div
+            style="font-family:var(--f-mono);font-size:0.68rem;color:rgba(255,255,255,0.40);text-align:center;line-height:1.7;">
+            هل أنت طالب في الزيتونة؟<br>مكانك هنا.</div>
+          <button class="e-btn eb-outline" style="align-self:center;">$ join --now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ ACHIEVEMENTS ══ -->
+  <section class="sec sec-ach" id="achievements">
+    <div class="sec-inner">
+      <div class="rv">
+        <div class="sec-chip">🏅 achievements</div>
+        <h2 class="sec-h2">إنجازاتنا في<br><em>المنافسات</em></h2>
+        <p class="sec-sub">خمس سنوات من التنافس والبناء — سجل حافل بالفخر الجامعي.</p>
+      </div>
+
+      <div class="ach-grid">
+        <div class="ach-card rv">
+          <div class="ach-rank rk-g">🥇</div>
+          <div class="ach-title">JoHackathon 2024</div>
+          <div class="ach-event">// Amman, Jordan · Nov 2024</div>
+          <div class="ach-desc">المركز الأول بين 45 فريقاً من جامعات الأردن. مشروع منصة توظيف ذكية بالذكاء الاصطناعي.
+          </div>
+          <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-o">AI</span><span
+              class="tag tg-m">React</span><span class="tag tg-s">Python</span></div>
+        </div>
+
+        <div class="ach-card rv rv-d1">
+          <div class="ach-rank rk-s">🥈</div>
+          <div class="ach-title">TechArena Jordan</div>
+          <div class="ach-event">// Zarqa, Jordan · Mar 2024</div>
+          <div class="ach-desc">المركز الثاني في مسابقة تطوير التطبيقات. تطبيق لإدارة الجدول الجامعي للطلاب.</div>
+          <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-v">Flutter</span><span
+              class="tag">Firebase</span></div>
+        </div>
+
+        <div class="ach-card rv rv-d2">
+          <div class="ach-rank rk-g">🥇</div>
+          <div class="ach-title">ZU Internal Hackathon</div>
+          <div class="ach-event">// Amman, Jordan · Dec 2023</div>
+          <div class="ach-desc">أول مكانين في الهاكاثون الداخلي السنوي. فريقان من Zaytoonic Coders على المنصة.</div>
+          <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-m">Node.js</span><span
+              class="tag tg-s">MongoDB</span></div>
+        </div>
+
+        <div class="ach-card rv">
+          <div class="ach-rank rk-b">🥉</div>
+          <div class="ach-title">Arab Collegiate Programming</div>
+          <div class="ach-event">// Online · Oct 2023</div>
+          <div class="ach-desc">المركز الثالث في المنطقة في مسابقة البرمجة التنافسية على مستوى الجامعات العربية.</div>
+          <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-o">C++</span><span
+              class="tag">Algorithms</span></div>
+        </div>
+
+        <div class="ach-card rv rv-d1">
+          <div class="ach-rank rk-s">🥈</div>
+          <div class="ach-title">Google Solution Challenge</div>
+          <div class="ach-event">// Global · Apr 2023</div>
+          <div class="ach-desc">ضمن أفضل 50 مشروع عالمياً — مشروع للصحة الرقمية في المجتمعات الريفية.</div>
+          <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-m">Firebase</span><span
+              class="tag tg-s">Android</span></div>
+        </div>
+
+        <div class="ach-card rv rv-d2">
+          <div class="ach-rank rk-g" style="font-size:3.4rem;">🏆</div>
+          <div class="ach-title">Best Club Award 2024</div>
+          <div class="ach-event">// Amman, Jordan · Jun 2024</div>
+          <div class="ach-desc">جائزة أفضل نادي طلابي في جامعة الزيتونة لعام 2024 من قِبل مجلس الطلبة.</div>
+          <div class="tags" style="margin-top:0.9rem;"><span class="tag tg-o">Award</span><span
+              class="tag tg-m">Community</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ══ -->
+  <section class="sec sec-cta">
+    <div class="sec-inner">
+      <div class="cta-inner rv">
+        <h2 class="cta-h2">انضم إلى<br><em>Zaytoonic Coders</em></h2>
+        <p class="cta-p">سواء كنت مبتدئاً أو محترفاً — مكانك هنا.<br>كل ما تحتاجه هو الشغف بالكود والرغبة في التعلم.</p>
+        <div class="cta-btns">
+          <button class="btn-fill">انضم للفريق 🫒</button>
+          <button class="btn-ghost">$ join --team zaytoonic</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-row">
+          <div class="nav-logo-mark">🫒</div>
+          <div>
+            <span class="nav-logo-text"
+              style="font-family:var(--f-display);font-size:1rem;font-weight:800;color:#fff;letter-spacing:-0.03em;">Zaytoonic
+              Coders</span>
+            <span class="nav-logo-sub"
+              style="font-family:var(--f-mono);font-size:0.60rem;color:rgba(255,255,255,0.38);display:block;letter-spacing:0.04em;">جامعة
+              الزيتونة الأردنية</span>
+          </div>
+        </div>
+        <p class="f-desc">مجتمع المبرمجين في جامعة الزيتونة الأردنية — نبني، نتعلم، ونلهم الجيل القادم من المطورين
+          الأردنيين.</p>
+      </div>
+
+      <div class="f-col">
+        <h5>الفريق</h5>
+        <ul>
+          <li><a href="#">عن Zaytoonic</a></li>
+          <li><a href="#">الأعضاء</a></li>
+          <li><a href="#">الانضمام</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="f-col">
+        <h5>الفعاليات</h5>
+        <ul>
+          <li><a href="#">ZayHack 2025</a></li>
+          <li><a href="#">الورش</a></li>
+          <li><a href="#">المحاضرات</a></li>
+          <li><a href="#">التقويم</a></li>
+        </ul>
+      </div>
+
+      <div class="f-col">
+        <h5>تواصل</h5>
+        <ul>
+          <li><a href="#">Discord</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">البريد الإلكتروني</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Zaytoonic Coders — جامعة الزيتونة الأردنية. Built with 💚</span>
+      <span class="f-code">// keep_coding.forever()</span>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
+
+    // Reveal on scroll
+    const rvObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rvObs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+
+    // Progress bars — trigger on scroll
+    const progObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const fill = e.target;
+          const w = fill.style.width;
+          fill.style.width = '0';
+          requestAnimationFrame(() => { fill.style.width = w; });
+          progObs.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.prog-fill').forEach(el => progObs.observe(el));
+  </script>
 </body>
+
 </html>
